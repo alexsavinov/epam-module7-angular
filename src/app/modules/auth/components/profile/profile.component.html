@@ -1,0 +1,60 @@
+<main>
+  <mat-card  class="wrapper mat-elevation-z3" color="primary" >
+
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon color="primary" class="mat-card">account_circle</mat-icon>
+      </div>
+      <mat-card-title>Profile</mat-card-title>
+      <mat-card-subtitle>Current user details</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput value="{{user.id}}" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>NAME</mat-label>
+        <input matInput value="{{user.name}}" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>E-MAIL</mat-label>
+        <input matInput value="{{user.email}}" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>USERNAME</mat-label>
+        <input matInput value="{{user.username}}" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>ROLES</mat-label>
+        <input matInput value="{{roles}}" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>ACCESS TOKEN</mat-label>
+        <textarea matInput value="" readonly>{{accessToken}}</textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>REFRESH TOKEN</mat-label>
+        <input matInput value="{{refreshToken}}" readonly>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="back()">
+          <mat-icon>arrow_back</mat-icon>BACK
+        </button>
+      </mat-card-actions>
+    </mat-card-footer>
+
+  </mat-card>
+
+</main>
+

@@ -1,0 +1,65 @@
+<header>
+
+  <mat-toolbar color="primary">
+
+    <!-- MENU ICON -->
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- MENU -->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="'tags'">
+        <mat-icon color="primary">sell</mat-icon>
+        Tags
+      </button>
+
+      <button mat-menu-item [routerLink]="'certificates'">
+        <mat-icon color="primary">card_giftcard</mat-icon>
+        Certificates
+      </button>
+
+      <button *ngIf="isAuthenticated" mat-menu-item [routerLink]="'orders'">
+        <mat-icon color="primary">credit_card</mat-icon>
+        Orders
+      </button>
+
+      <button *ngIf="isAuthenticated" mat-menu-item [routerLink]="'users'">
+        <mat-icon color="primary">people</mat-icon>
+        Users
+      </button>
+    </mat-menu>
+
+    <!-- LOGO -->
+    <button mat-flat-button color="primary" routerLink="">
+      <div class="button-logo">
+        <img class="logo" ngSrc="../../../../assets/cert-logo.png" alt="cert-logo.png" height="30" width="30">
+        <span class="title">Gift Certificates App</span>
+      </div>
+    </button>
+
+    <span class="spacer"></span>
+
+    <!-- NAVIGATION -->
+    <button mat-icon-button aria-label="Shopping cart" [routerLink]="'shopping-cart'">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <div class="nav-buttons">
+      <button *ngIf="!isAuthenticated" mat-flat-button color="primary" [routerLink]="'auth/login'">Login</button>
+      <button *ngIf="isAuthenticated" mat-flat-button color="primary" [routerLink]="'auth/profile'">
+        <mat-icon>person</mat-icon>
+        {{username}}
+      </button>
+
+      <div class="vertical-divider-wrapper">
+        <div class="vertical-divider"></div>
+      </div>
+
+      <button *ngIf="!isAuthenticated" mat-flat-button color="primary" [routerLink]="'auth/register'">Sign Up</button>
+      <button *ngIf="isAuthenticated" mat-flat-button color="primary" [routerLink]="'auth/logout'">Logout</button>
+    </div>
+
+  </mat-toolbar>
+
+</header>

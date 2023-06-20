@@ -1,0 +1,32 @@
+@import "../../../../../styles";
+
+
+.mat-header-row, mat-paginator {
+  background-color: $primary-color100;
+}
+
+.mat-paginator {
+  background-color: $primary-color100;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: white !important;
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.spacer {
+  display: inline-block;
+  width: 1em;
+}
+
+.buttons {
+  display: flex;
+
+}
+
+

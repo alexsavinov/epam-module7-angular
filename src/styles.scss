@@ -1,0 +1,210 @@
+/* You can add global styles to this file, and also import other style files */
+//@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@use 'sass:map';
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$my-app-primary: mat.define-palette(mat.$deep-purple-palette);
+//$my-app-primary: mat.define-palette(mat.$blue-gray-palette);
+//$my-app-primary: mat.define-palette(mat.$indigo-palette);
+//$my-app-primary: mat.define-palette(mat.$teal-palette);
+$my-app-accent: mat.define-palette(mat.$blue-palette);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+
+$my-app-theme: mat.define-light-theme(
+    (
+      color: (
+        primary: $my-app-primary,
+        accent: $my-app-accent,
+        warn: $my-app-warn,
+      ),
+    )
+);
+
+@include mat.all-component-themes($my-app-theme);
+
+
+$color-config: mat.get-color-config($my-app-theme);
+$primary-palette: map.get($color-config, 'primary');
+$accent-palette: map.get($color-config, 'accent');
+$warn-palette: map.get($color-config, 'warn');
+
+
+$primary-color: mat.get-color-from-palette($primary-palette, 500);
+$primary-color700: mat.get-color-from-palette($primary-palette, 700);
+$primary-color600: mat.get-color-from-palette($primary-palette, 600);
+$primary-color500: mat.get-color-from-palette($primary-palette, 500);
+$primary-color400: mat.get-color-from-palette($primary-palette, 400);
+$primary-color300: mat.get-color-from-palette($primary-palette, 300);
+$primary-color200: mat.get-color-from-palette($primary-palette, 200);
+$primary-color100: mat.get-color-from-palette($primary-palette, 100);
+$primary-color50: mat.get-color-from-palette($primary-palette, 50);
+
+$error-color: mat.get-color-from-palette($warn-palette, 700);
+$error-color50: mat.get-color-from-palette($warn-palette, 50);
+$error-color100: mat.get-color-from-palette($warn-palette, 100);
+$error-color200: mat.get-color-from-palette($warn-palette, 200);
+$error-color300: mat.get-color-from-palette($warn-palette, 300);
+$error-color400: mat.get-color-from-palette($warn-palette, 400);
+$error-color500: mat.get-color-from-palette($warn-palette, 500);
+$error-color600: mat.get-color-from-palette($warn-palette, 600);
+$error-color700: mat.get-color-from-palette($warn-palette, 700);
+$error-color800: mat.get-color-from-palette($warn-palette, 800);
+$error-color900: mat.get-color-from-palette($warn-palette, 900);
+$error-color1000: mat.get-color-from-palette($warn-palette, 1000);
+
+$accent-color: mat.get-color-from-palette($accent-palette, 500);
+$accent-color50: mat.get-color-from-palette($accent-palette, 50);
+$accent-color100: mat.get-color-from-palette($accent-palette, 100);
+$accent-color200: mat.get-color-from-palette($accent-palette, 200);
+$accent-color300: mat.get-color-from-palette($accent-palette, 300);
+$accent-color400: mat.get-color-from-palette($accent-palette, 400);
+$accent-color500: mat.get-color-from-palette($accent-palette, 500);
+$accent-color600: mat.get-color-from-palette($accent-palette, 600);
+$accent-color700: mat.get-color-from-palette($accent-palette, 700);
+$accent-color800: mat.get-color-from-palette($accent-palette, 800);
+$accent-color900: mat.get-color-from-palette($accent-palette, 900);
+$accent-color1000: mat.get-color-from-palette($accent-palette, 1000);
+
+html, body {
+  font-family: 'Inconsolata', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  background-color: $primary-color50;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+main {
+  min-height: 81vh;
+}
+
+#info-message {
+  display: flex;
+  gap: 1em;
+  //justify-content: center;
+  margin: 1em;
+  //color: $primary1;
+  //color: mat.get-color-from-palette(mat.$indigo-palette, 'primary');
+  //color: mat.get-color-from-palette($theme-accent, default);
+  color: $primary-color;
+  font-weight: bold !important;
+}
+
+#error-message {
+  margin: 1em;
+  color: $error-color;
+  font-weight: bold !important;
+}
+
+#submit {
+  color: $primary-color !important;
+}
+
+mat-card-header, mat-card-footer {
+  //background-color: $accent-color;
+  background-color: $primary-color100;
+}
+
+mat-card-content {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-title {
+  margin-top: 0.1em;
+}
+
+.wrapper {
+  margin: 2em 4em;
+}
+
+mat-icon.mat-card {
+  font-size: 3rem !important;
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+mat-card-title {
+  font-weight: bold !important;
+  padding: 0.1rem 0 0.2rem 1em !important;
+}
+
+button > mat-icon {
+  margin-bottom: 0.05em !important;
+}
+
+mat-card-actions {
+  gap: 0.5em !important;
+}
+
+.mat-column-id {
+  width: 1rem !important;
+}
+
+.mat-column-action {
+  width: 4rem !important;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2em;
+  color: $primary-color;
+}
+
+
+.button-details {
+  min-width: 6rem;
+  background-color: $primary-color50;
+  //color: $primary-color400;
+  border: 1px solid $primary-color500;
+  //font-weight: bold;
+  //height: 2.3rem !important;
+  //width: 2.3rem !important;
+  mat-icon {
+    font-size: 1.5em;
+    color: $primary-color400;
+  }
+
+}
+
+.button-delete {
+  min-width: 6rem;
+  background-color: $error-color50;
+  //color: $error-color400;
+  border: 1px solid $error-color700;
+  //font-weight: bold;
+  //height: 2.3rem !important;
+  //width: 2.3rem !important;
+  mat-icon {
+    font-size: 1.5em;
+    color: $error-color400;
+  }
+}
+
+.button-create {
+  min-width: 6rem;
+  background-color: #c7e1c7;
+  //color: $error-color400;
+  border: 1px solid green;
+  //font-weight: bold;
+  //height: 2.3rem !important;
+  //width: 2.3rem !important;
+
+  mat-icon {
+    font-size: 1.4em;
+    color: green;
+  }
+}

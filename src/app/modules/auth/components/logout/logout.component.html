@@ -1,0 +1,15 @@
+<main>
+  <h2>Are you sure?</h2>
+  <button mat-raised-button color="primary" (click)="logout()">
+    <mat-icon>logout</mat-icon>LOGOUT
+  </button>
+
+  <div id="info-message" *ngIf="infoMessage" >
+    <mat-progress-spinner mode="indeterminate" diameter="20"></mat-progress-spinner>
+    {{infoMessage}}
+  </div>
+
+  <div id="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</main>

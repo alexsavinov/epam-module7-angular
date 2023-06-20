@@ -1,0 +1,20 @@
+<div mat-dialog-title class="mat-dialog-title">
+  Warning!
+</div>
+
+<div mat-dialog-content class="mat-dialog-content">
+  Data not saved! Leave page?
+</div>
+
+<div mat-dialog-actions class="mat-dialog-actions">
+  <!--  <button mat-button (click)="onNoClick()">Cancel</button>-->
+  <!--  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Continue</button>-->
+  <button mat-raised-button color="primary" (click)="onNoClick()">
+    <!--    <mat-icon>cancel</mat-icon>-->
+    STAY
+  </button>
+  <button mat-raised-button id="submit" [mat-dialog-close]="true" cdkFocusInitial>
+    <!--    <mat-icon>arrow_right</mat-icon>-->
+    LEAVE
+  </button>
+</div>

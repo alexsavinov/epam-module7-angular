@@ -1,0 +1,15 @@
+@import "../../../../styles";
+
+footer {
+  /*height: 2em;*/
+  //position: absolute;
+  //bottom: 0;
+  //width: 100vi;
+      flex-grow: 0;
+    flex-shrink: 0;
+}
+
+mat-toolbar {
+  font-size: 1em;
+  justify-content: center;
+}
