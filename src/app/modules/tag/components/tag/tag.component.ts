@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 import {emptyTag, ITag} from "../../interfaces";
 import {TagService} from "../../services";
-import {CustomErrorStateMatcher} from "../../../../shared";
+import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
+
 
 @Component({
   selector: 'app-tag',
@@ -25,24 +27,25 @@ export class TagComponent implements OnInit {
   constructor(private tagService: TagService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
-              private router: Router) {
+              private router: Router,
+              private matDialog: MatDialog,
+              public dialogRef: MatDialogRef<TagComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { id: number, creating: boolean }) {
   }
 
   ngOnInit() {
-    if (this.router.url == '/tags/add') {
-      this.creating = true;
-    }
-
-    if (this.creating) {
-      this.tag = emptyTag();
-      this._createForm();
-    } else {
-      this.activatedRoute.params.subscribe(({id}) => {
-        this.activatedRoute.data.subscribe(({data}) => {
+    if (this.data) {
+      if (this.data['creating']) {
+        this.creating = true;
+        this.tag = emptyTag();
+        this._createForm();
+      } else {
+        const id: string = this.data['id'].toString();
+        this.tagService.getById(id).subscribe(data => {
           this.tag = data as ITag;
           this._createForm();
         });
-      });
+      }
     }
   }
 
@@ -59,8 +62,17 @@ export class TagComponent implements OnInit {
 
   back(event: MouseEvent) {
     event.preventDefault();
-    this.location.back();
-    // this.router.navigate(['users']);
+
+    if (this.form.dirty) {
+      const dialogRef = this.matDialog.open(ModalConfirmComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.dialogRef.close(false);
+        }
+      });
+    } else {
+      this.dialogRef.close(false)
+    }
   }
 
   onSubmit(form: FormGroup) {
@@ -81,16 +93,14 @@ export class TagComponent implements OnInit {
 
     this.tagService.create(tag).subscribe({
         next: (value) => {
-          this.infoMessage = `Tag created..`;
+          this.infoMessage = `Creating Tag '${value.name}'..`;
           this.tag = value;
           setTimeout(() => {
             this.form.reset();
-            // this.router.navigate(['users/' + value.id]);
-            this.router.navigate(['tags']);
+            this.dialogRef.close(value.name);
           }, 2000);
         },
         error: e => {
-          console.log(e)
           this.errorMessage = e.message;
         }
       }
@@ -105,10 +115,12 @@ export class TagComponent implements OnInit {
 
     this.tagService.update(tag).subscribe({
         next: (value) => {
-          this.infoMessage = `Tag (id=${value.id}) updated..`;
+          this.infoMessage = `Updating Tag (id=${value.id})..`;
           this.tag = value;
-          this.form.reset();
-          this._createForm();
+          setTimeout(() => {
+            this.form.reset();
+            this.dialogRef.close(value.name);
+          }, 2000);
         },
         error: e => {
           this.errorMessage = e.message;

@@ -1,5 +1,6 @@
 <main class="wrapper">
 
+  <!-- HEADER -->
   <div class="header">
     <div class="title" [routerLink]="'/users'">
       Users
@@ -19,6 +20,7 @@
   <!--    </button>-->
   <!--  </mat-form-field>-->
 
+  <!-- TABLE -->
   <div class="mat-elevation-z3">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
@@ -90,6 +92,8 @@
       <!--      </tr>-->
     </table>
 
+
+    <!-- PAGINATOR -->
     <!--                   [pageSize]="numberOfElements"-->
     <mat-paginator class="mat-paginator"
                    [length]="totalElements"
@@ -102,6 +106,7 @@
 
   </div>
 
+  <!-- MESSAGES -->
   <div id="info-message" *ngIf="infoMessage">
     {{infoMessage}}
   </div>

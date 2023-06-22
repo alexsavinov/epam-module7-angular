@@ -1,18 +1,12 @@
 <main class="wrapper">
 
-  <div class="header">
-    <div class="title">
-      <span [routerLink]="'/tags'">Tags</span>
-      <mat-icon>arrow_forward_ios</mat-icon>
-      <span *ngIf="creating">Create tag</span>
-      <span *ngIf="!creating">Edit tag</span>
-    </div>
-  </div>
+  <!-- FORM -->
+  <form *ngIf="form" [formGroup]="form" (submit)='onSubmit(form)'>
 
-  <form [formGroup]="form" (submit)='onSubmit(form)'>
-
+    <!-- CARD -->
     <mat-card color="primary" class="mat-elevation-z3">
 
+      <!-- CARD HEADER -->
       <mat-card-header>
         <div mat-card-avatar>
           <mat-icon color="primary" class="mat-card">sell</mat-icon>
@@ -22,8 +16,9 @@
         <mat-card-subtitle *ngIf="!creating">Update an existing tag</mat-card-subtitle>
       </mat-card-header>
 
+      <!-- CARD CONTENT -->
       <mat-card-content>
-        <mat-form-field>
+        <mat-form-field *ngIf="!creating">
           <mat-label>ID</mat-label>
           <input matInput value="{{tag.id}}" readonly>
         </mat-form-field>
@@ -43,26 +38,30 @@
 
       </mat-card-content>
 
+      <!-- CARD FOOTER -->
       <mat-card-footer>
         <mat-card-actions>
 
           <button mat-raised-button color="primary" (click)="back($event)">
-            <mat-icon>arrow_back</mat-icon>
-            BACK
+            <mat-icon>closes</mat-icon>
+            CLOSE
           </button>
 
           <button mat-raised-button id="submit" type="submit" [disabled]="form.invalid">
-            <mat-icon>person_add</mat-icon>
+            <mat-icon *ngIf="creating">add</mat-icon>
             <span *ngIf="creating">CREATE</span>
+            <mat-icon *ngIf="!creating">save</mat-icon>
             <span *ngIf="!creating">SAVE</span>
           </button>
 
         </mat-card-actions>
       </mat-card-footer>
 
+      <!-- MESSAGES -->
       <div id="info-message" *ngIf="infoMessage">
         {{infoMessage}}
       </div>
+      <mat-progress-bar mode="indeterminate" *ngIf="infoMessage"></mat-progress-bar>
 
       <div id="error-message" *ngIf="errorMessage">
         {{errorMessage}}

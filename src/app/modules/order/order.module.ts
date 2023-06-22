@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
-import { OrderRoutingModule } from './order-routing.module';
-import { OrderComponent } from './components/order/order.component';
-import { OrdersComponent } from './components/orders/orders.component';
+import {OrderRoutingModule} from './order-routing.module';
+import {MaterialModule} from "../../shared";
+import {OrderComponent, OrdersComponent} from "./components";
 
 
 @NgModule({
@@ -13,7 +14,11 @@ import { OrdersComponent } from './components/orders/orders.component';
   ],
   imports: [
     CommonModule,
-    OrderRoutingModule
+    OrderRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
-export class OrderModule { }
+export class OrderModule {
+}

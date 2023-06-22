@@ -1,0 +1,58 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. user" #input [(ngModel)]="input.value">
+  <button *ngIf="input.value" matSuffix mat-icon-button aria-label="Clear" (click)="input.value=''; setFilter('')">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="600" maxBufferPx="1500" class="example-viewport">
+  <!--  <div *cdkVirtualFor="let item of dataSource" class="example-item">-->
+
+  <div class="viewport-wrapper">
+
+    <!-- CARD -->
+    <mat-card *cdkVirtualFor="let item of dataSource" class="mat-elevation-z3" color="primary">
+
+      <!-- CARD HEADER -->
+      <mat-card-header *ngIf="item">
+
+        <div mat-card-avatar>
+          <mat-icon color="primary">card_giftcard</mat-icon>
+        </div>
+
+        <mat-card-title>Gift certificate</mat-card-title>
+        <mat-card-subtitle>Enter your credentials</mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- CARD CONTENT -->
+      <mat-card-content *ngIf="item">
+        <div>ID: {{item.id}}</div>
+        <div>NAME: {{item.name}}</div>
+        <div>DESC: {{item.description}}</div>
+        <div *ngFor="let tag of item.tags">TAG: {{tag.name}}</div>
+      </mat-card-content>
+
+      <!-- CARD FOOTER -->
+      <mat-card-footer *ngIf="item">
+        <mat-card-actions>
+          <!--          <button mat-raised-button color="primary" type="submit" (click)="login()" [disabled]="form.invalid">-->
+          <!--            <mat-icon>login</mat-icon>-->
+          <!--            LOGIN-->
+          <!--          </button>-->
+        </mat-card-actions>
+
+
+      </mat-card-footer>
+      <!--      -->
+      <div *ngIf="!item">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        Loading...
+      </div>
+
+    </mat-card>
+
+
+  </div>
+  <!--  </div>-->
+</cdk-virtual-scroll-viewport>

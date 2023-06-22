@@ -1,1 +1,142 @@
-<p>certificate works!</p>
+<main class="wrapper">
+
+  <!-- FORM -->
+  <form *ngIf="form" [formGroup]="form" (submit)='onSubmit(form)'>
+
+    <!-- CARD -->
+    <mat-card color="primary" class="mat-elevation-z3">
+
+      <!-- CARD HEADER -->
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon color="primary" class="mat-card">card_giftcard</mat-icon>
+        </div>
+        <mat-card-title>Gift certificate</mat-card-title>
+        <mat-card-subtitle *ngIf="creating">Create a new gift certificate</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="!creating">Update an existing gift certificate</mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- CARD CONTENT -->
+      <mat-card-content>
+
+        <!-- ID -->
+        <mat-form-field *ngIf="!creating">
+          <mat-label>ID</mat-label>
+          <input matInput value="{{certificate.id}}" readonly>
+        </mat-form-field>
+
+        <!-- NAME -->
+        <mat-form-field>
+          <mat-label>NAME</mat-label>
+          <input type="text" matInput formControlName="name"
+                 [errorStateMatcher]="matcher" placeholder="name">
+          <mat-error *ngIf="form.controls['name'].hasError('minlength')
+       && !form.controls['name'].hasError('required')">
+            Please enter a valid name
+          </mat-error>
+          <mat-error *ngIf="form.controls['name'].hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- DESCRIPTION -->
+        <mat-form-field>
+          <mat-label>DESCRIPTION</mat-label>
+          <textarea matInput placeholder="description" formControlName="description"
+                    class="description"
+                    [errorStateMatcher]="matcher">
+            {{certificate.description}}
+          </textarea>
+          <mat-error *ngIf="form.controls['name'].hasError('minlength')
+       && !form.controls['description'].hasError('required')">
+            Please enter a valid description
+          </mat-error>
+          <mat-error *ngIf="form.controls['description'].hasError('required')">
+            Description is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- PRICE -->
+        <mat-form-field>
+          <mat-label>PRICE</mat-label>
+          <input type="text" matInput formControlName="price"
+                 [errorStateMatcher]="matcher" placeholder="price">
+          <mat-error *ngIf="form.controls['price'].hasError('minlength')
+       && !form.controls['price'].hasError('required')">
+            Please enter a valid price
+          </mat-error>
+          <mat-error *ngIf="form.controls['price'].hasError('required')">
+            Price is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- DURATION -->
+        <mat-form-field>
+          <mat-label>DURATION</mat-label>
+          <input type="text" matInput formControlName="duration"
+                 [errorStateMatcher]="matcher" placeholder="duration">
+          <mat-error *ngIf="form.controls['duration'].hasError('minlength')
+       && !form.controls['duration'].hasError('required')">
+            Please enter a valid duration
+          </mat-error>
+          <mat-error *ngIf="form.controls['duration'].hasError('required')">
+            Duration is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- TAGS -->
+        <mat-form-field>
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter tags">
+            <mat-chip-row *ngFor="let tag of this.tags"
+                          (removed)="removeTag(tag)"
+                          [editable]="true"
+                          (edited)="editTag(tag, $event)"
+                          [aria-description]="'press enter to edit ' + tag.name">
+              {{tag.name}}
+              <button matChipRemove [attr.aria-label]="'remove ' + tag.name">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            <input placeholder="New tag..."
+                   [matChipInputFor]="chipGrid"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="addTag($event)"/>
+          </mat-chip-grid>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <!-- CARD FOOTER -->
+      <mat-card-footer>
+        <mat-card-actions>
+
+          <button mat-raised-button color="primary" (click)="back($event)">
+            <mat-icon>closes</mat-icon>
+            CLOSE
+          </button>
+
+          <button mat-raised-button id="submit" type="submit" [disabled]="form.invalid">
+            <mat-icon *ngIf="creating">add</mat-icon>
+            <span *ngIf="creating">CREATE</span>
+            <mat-icon *ngIf="!creating">save</mat-icon>
+            <span *ngIf="!creating">SAVE</span>
+          </button>
+
+        </mat-card-actions>
+      </mat-card-footer>
+
+      <!-- MESSAGES -->
+      <div id="info-message" *ngIf="infoMessage">
+        {{infoMessage}}
+      </div>
+      <mat-progress-bar mode="indeterminate" *ngIf="infoMessage"></mat-progress-bar>
+
+      <div id="error-message" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+    </mat-card>
+  </form>
+
+</main>

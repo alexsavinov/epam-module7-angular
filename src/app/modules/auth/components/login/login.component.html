@@ -1,9 +1,12 @@
 <main>
 
+  <!-- FORM -->
   <form [formGroup]="form" class="form-login">
 
+    <!-- CARD -->
     <mat-card class="login-wrapper mat-elevation-z3" color="primary">
 
+      <!-- CARD HEADER -->
       <mat-card-header>
 
         <div mat-card-avatar>
@@ -14,6 +17,7 @@
         <mat-card-subtitle>Enter your credentials</mat-card-subtitle>
       </mat-card-header>
 
+      <!-- CARD CONTENT -->
       <mat-card-content>
         <mat-form-field>
           <mat-label>Username</mat-label>
@@ -69,6 +73,7 @@
 
       </mat-card-content>
 
+      <!-- CARD FOOTER -->
       <mat-card-footer>
         <mat-card-actions>
           <button mat-raised-button color="primary" type="submit" (click)="login()" [disabled]="form.invalid">
@@ -78,11 +83,12 @@
         </mat-card-actions>
 
       </mat-card-footer>
-        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 
     </mat-card>
   </form>
 
+  <!-- MESSAGES -->
   <div id="info-message" *ngIf="infoMessage">
     {{infoMessage}}
   </div>

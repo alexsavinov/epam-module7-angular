@@ -9,7 +9,7 @@
       <mat-card-subtitle>Current user details</mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content *ngIf="user">
       <mat-form-field>
         <mat-label>ID</mat-label>
         <input matInput value="{{user.id}}" readonly>

@@ -12,6 +12,7 @@ import {UserService} from "../../services";
 import {AuthDataService} from "../../../auth/services";
 import {map} from "rxjs";
 import {UserComponent} from "../user/user.component";
+import {TagComponent} from "../../../tag/components";
 
 @Component({
   selector: 'app-users',
@@ -127,16 +128,35 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   create() {
     // this.router.navigate(['users/add']);
-        const dialogRef = this.matDialog.open(UserComponent, {
-        id: '1', data: {id: undefined, creating: true}}, );
+    const dialogRef = this.matDialog.open(
+      UserComponent,
+      {data: {id: undefined, creating: true}}
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchData();
+        this.infoMessage = `User '${result}' was created!`;
+      }
+    });
   }
 
   edit(id: number) {
 
-    const dialogRef = this.matDialog.open(UserComponent, {
-        id: '1', data: {id: id}}, );
     // this.router.navigate(['/users/' + id])
 
     // return dialogRef.afterClosed().pipe(map(result => result != undefined));
+
+    const dialogRef = this.matDialog.open(
+      UserComponent,
+      {data: {id: id, creating: false}}
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchData();
+        this.infoMessage = `User '${result}' was updated!`;
+      }
+    });
   }
 }

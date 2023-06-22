@@ -1,1 +1,112 @@
-<p>certificates works!</p>
+<main class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="title" [routerLink]="'/certificates'">
+      Gift certificates
+    </div>
+
+    <button mat-raised-button class="button-create" (click)="create()">
+      <mat-icon>add_circle</mat-icon>
+      Add
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="mat-elevation-z3">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+        <td mat-cell *matCellDef="let row"> {{row.description}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+      </ng-container>
+
+      <!-- Duration Column -->
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
+        <td mat-cell *matCellDef="let row"> {{row.duration}} </td>
+      </ng-container>
+
+      <!-- Tags Column -->
+      <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tags</th>
+        <td mat-cell *matCellDef="let row">
+          <span *ngFor="let tag of row.tags; last as isFirst">
+            {{tag.name}}<span *ngIf="!isFirst">, </span>
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Action buttons Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row">
+
+          <div class="buttons">
+
+            <button mat-button class="button-details" (click)="edit(row.id)">
+              <mat-icon>description</mat-icon>
+              Edit
+            </button>
+
+            <span class="spacer"></span>
+
+            <button mat-button class="button-delete" (click)="delete(row.id)">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+
+          </div>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data</td>
+      </tr>
+    </table>
+
+    <!-- PAGINATOR -->
+    <mat-paginator class="mat-paginator"
+                   [length]="totalElements"
+                   [pageIndex]="number"
+                   [pageSizeOptions]="[10, 20, 50]"
+                   [showFirstLastButtons]="true"
+                   (page)="pageEvent = getServerData($event)"
+                   aria-label="Select page of certificates">
+    </mat-paginator>
+
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="info-message" *ngIf="infoMessage">
+    {{infoMessage}}
+  </div>
+  <div id="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+
+</main>

@@ -14,8 +14,12 @@ export class TagService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(pageable: IPageable): Observable<any> {
-    return this.httpClient.get<any>(`${urls.tags}?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}`);
+  getAll(pageable?: IPageable): Observable<any> {
+    if (pageable) {
+      return this.httpClient.get<any>(`${urls.tags}?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}`);
+    } else {
+      return this.httpClient.get<any>(`${urls.tags}`);
+    }
   }
 
   getById(id: string): Observable<ITag> {

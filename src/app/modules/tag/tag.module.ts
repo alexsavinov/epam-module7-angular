@@ -1,18 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { TagRoutingModule } from './tag-routing.module';
-import { TagsComponent } from './components/tags/tags.component';
-import { TagComponent } from './components/tag/tag.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatButtonModule} from "@angular/material/button";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatIconModule} from "@angular/material/icon";
-import {MatInputModule} from "@angular/material/input";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatSortModule} from "@angular/material/sort";
-import {MatTableModule} from "@angular/material/table";
-import {MatCardModule} from "@angular/material/card";
+
+import {TagRoutingModule} from './tag-routing.module';
+import {MaterialModule} from "../../shared";
+import {TagComponent, TagsComponent} from "./components";
 
 
 @NgModule({
@@ -20,19 +12,13 @@ import {MatCardModule} from "@angular/material/card";
     TagsComponent,
     TagComponent
   ],
-    imports: [
-        CommonModule,
-        TagRoutingModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatTableModule,
-        MatCardModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    TagRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
-export class TagModule { }
+export class TagModule {
+}

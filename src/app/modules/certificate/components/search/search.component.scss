@@ -1,0 +1,28 @@
+.example-viewport {
+  height: 87vh;
+  //width: 500px;
+  border: 1px solid black;
+}
+
+.viewport-wrapper{
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  padding: 5em;
+  justify-content: center;
+
+}
+//.example-item {
+//  height: 100px;
+//}
+
+mat-card {
+  width: 20rem;
+  height: 20rem;
+}
+
+mat-card-header {
+  height: 2rem;
+
+}
+

@@ -1,5 +1,6 @@
 <main class="wrapper">
 
+  <!-- HEADER -->
   <div class="header">
     <div class="title" [routerLink]="'/tags'">
       Tags
@@ -11,6 +12,7 @@
     </button>
   </div>
 
+  <!-- TABLE -->
   <div class="mat-elevation-z3">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
@@ -33,9 +35,9 @@
 
           <div class="buttons">
 
-            <button mat-button class="button-details" [routerLink]="'/tags/'+row.id">
+            <button mat-button class="button-details" (click)="edit(row.id)">
               <mat-icon>description</mat-icon>
-              Details
+              Edit
             </button>
 
             <span class="spacer"></span>
@@ -59,6 +61,7 @@
       </tr>
     </table>
 
+    <!-- PAGINATOR -->
     <mat-paginator class="mat-paginator"
                    [length]="totalElements"
                    [pageIndex]="number"
@@ -70,6 +73,7 @@
 
   </div>
 
+  <!-- MESSAGES -->
   <div id="info-message" *ngIf="infoMessage">
     {{infoMessage}}
   </div>

@@ -17,20 +17,23 @@ export class ProfileComponent implements OnInit {
   user: IUser;
   accessToken: string;
   refreshToken: string;
-  roles: string;
+  roles: string | undefined;
 
   constructor(private authService: AuthService,
               private activatedRoute: ActivatedRoute,
+              private userService: UserService,
               private location: Location) {
   }
 
   ngOnInit() {
     this.accessToken = this.authService.getAccessToken();
     this.refreshToken = this.authService.getRefreshToken();
+    const id: string = this.authService.getUserId();
 
-    this.activatedRoute.data.subscribe(({data}) => {
+    this.userService.getById(id).subscribe(data => {
+    // this.activatedRoute.data.subscribe(({data}) => {
       this.user = data as IUser;
-      this.roles = data.roles.map((role: IRole) => role.name).join(', ');
+      this.roles = data.roles?.map((role: IRole) => role.name).join(', ');
     });
   }
 

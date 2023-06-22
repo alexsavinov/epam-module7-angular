@@ -1,0 +1,37 @@
+<main class="wrapper">
+
+  <div class="mat-elevation-z3">
+
+    <!-- TABLE -->
+    <table mat-table [dataSource]="dataSource">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+
+      <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectUser(row.id)"></tr>
+
+    </table>
+
+    <!-- PAGINATOR -->
+    <mat-paginator class="mat-paginator"
+                   [length]="totalElements"
+                   [pageIndex]="number"
+                   [pageSizeOptions]="[10, 20, 50]"
+                   [showFirstLastButtons]="true"
+                   (page)="pageEvent = getServerData($event)"
+                   aria-label="Select page of users">
+    </mat-paginator>
+
+  </div>
+
+</main>

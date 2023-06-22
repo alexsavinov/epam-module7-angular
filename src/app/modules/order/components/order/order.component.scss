@@ -1,0 +1,16 @@
+@import "../../../../../styles";
+
+main {
+  min-height: unset;
+  min-width: 30rem;
+}
+
+.wrapper {
+  padding: 0px;
+  margin: 0px;
+}
+
+.select-icon {
+  margin: 0px;
+  color: $primary-color;
+}

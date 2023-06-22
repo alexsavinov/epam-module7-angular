@@ -10,6 +10,7 @@ import {ITag} from "../../interfaces";
 import {AuthDataService} from "../../../auth/services";
 import {ModalConfirmDeleteComponent} from "../../../../shared";
 import {TagService} from "../../services";
+import {TagComponent} from "../tag/tag.component";
 
 
 @Component({
@@ -46,7 +47,7 @@ export class TagsComponent implements OnInit {
               private matDialog: MatDialog) {
   }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.fetchData();
   }
 
@@ -102,6 +103,30 @@ export class TagsComponent implements OnInit {
   }
 
   create() {
-    this.router.navigate(['tags/add']);
+    const dialogRef = this.matDialog.open(
+      TagComponent,
+      {data: {id: undefined, creating: true}}
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchData();
+        this.infoMessage = `Tag '${result}' was created!`;
+      }
+    });
+  }
+
+  edit(id: number) {
+    const dialogRef = this.matDialog.open(
+      TagComponent,
+      {data: {id: id, creating: false}}
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchData();
+        this.infoMessage = `Tag '${result}' was updated!`;
+      }
+    });
   }
 }

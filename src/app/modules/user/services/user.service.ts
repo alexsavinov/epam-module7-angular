@@ -14,8 +14,12 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(pageable: IPageable): Observable<any> {
-    return this.httpClient.get<any>(`${urls.users}?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}`);
+  getAll(pageable?: IPageable): Observable<any> {
+    if (pageable) {
+      return this.httpClient.get<any>(`${urls.users}?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}`);
+    } else {
+      return this.httpClient.get<any>(`${urls.users}`);
+    }
   }
 
   getById(id: string): Observable<IUser> {
@@ -32,6 +36,5 @@ export class UserService {
 
   deleteById(id: number): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${urls.users}/${id}`);
-    // return <Observable>true;
   }
 }

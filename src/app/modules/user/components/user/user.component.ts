@@ -5,7 +5,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {emptyUser, IUser, IUserCreateRequest, IUserUpdateRequest} from "../../interfaces";
 import {IRole} from "../../../auth/interfaces";
-import {UserDataService, UserService} from "../../services";
+import {UserService} from "../../services";
 import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {map} from "rxjs";
@@ -19,17 +19,19 @@ import {map} from "rxjs";
 export class UserComponent implements OnInit {
   user: IUser;
   roles: string | undefined;
+
   form: FormGroup;
   matcher = new CustomErrorStateMatcher();
+
   hide: boolean = true;
   creating: boolean;
+
   infoMessage: string;
   errorMessage: string;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
-              private dataService: UserDataService,
               private router: Router,
               private matDialog: MatDialog,
               public dialogRef: MatDialogRef<UserComponent>,
@@ -112,17 +114,16 @@ export class UserComponent implements OnInit {
     // this.location.back();
 
     if (this.form.dirty) {
-      const dialogRef = this.matDialog.open(ModalConfirmComponent, {id: '2'});
+      const dialogRef = this.matDialog.open(ModalConfirmComponent);
       // dialogRef.afterClosed().pipe(map(result => result != undefined))
       dialogRef.afterClosed().subscribe(result => {
         // console.log('The dialog was closed ' + result);
         if (result) {
-          this.dialogRef.close();
+          this.dialogRef.close(false);
         }
-        // this.animal = result;
       });
     } else {
-      this.dialogRef.close()
+      this.dialogRef.close(false)
     }
 
     // this.dialogRef.close();
@@ -151,12 +152,13 @@ export class UserComponent implements OnInit {
 
     this.userService.create(user).subscribe({
         next: (value) => {
-          this.infoMessage = `User created..`;
+          this.infoMessage = `User '${value.name}' created..`;
           this.user = value;
           setTimeout(() => {
             this.form.reset();
             // this.router.navigate(['users/' + value.id]);
-            this.router.navigate(['users']);
+            // this.router.navigate(['users']);
+            this.dialogRef.close(value.name);
           }, 2000);
         },
         error: e => {
@@ -183,8 +185,10 @@ export class UserComponent implements OnInit {
         next: (value) => {
           this.infoMessage = `User (id=${value.id}) updated..`;
           this.user = value;
-          this.form.reset();
-          this._createForm();
+          setTimeout(() => {
+            this.form.reset();
+            this.dialogRef.close(value.name);
+          }, 2000);
         },
         error: e => {
           this.errorMessage = e.message;

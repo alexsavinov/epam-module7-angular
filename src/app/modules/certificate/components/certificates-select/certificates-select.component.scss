@@ -9,3 +9,11 @@ main {
   padding: 0px;
   margin: 0px;
 }
+
+.mat-mdc-header-cell, .mat-paginator {
+  background-color: $primary-color100;
+}
+
+.mat-mdc-cell {
+  cursor: pointer;
+}

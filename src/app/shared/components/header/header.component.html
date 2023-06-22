@@ -9,14 +9,14 @@
 
     <!-- MENU -->
     <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="'certificates'">
+        <mat-icon color="primary">card_giftcard</mat-icon>
+        Gift certificates
+      </button>
+
       <button mat-menu-item [routerLink]="'tags'">
         <mat-icon color="primary">sell</mat-icon>
         Tags
-      </button>
-
-      <button mat-menu-item [routerLink]="'certificates'">
-        <mat-icon color="primary">card_giftcard</mat-icon>
-        Certificates
       </button>
 
       <button *ngIf="isAuthenticated" mat-menu-item [routerLink]="'orders'">
@@ -41,6 +41,10 @@
     <span class="spacer"></span>
 
     <!-- NAVIGATION -->
+    <button mat-icon-button aria-label="Search" [routerLink]="'certificates/search'">
+      <mat-icon>search</mat-icon>
+    </button>
+
     <button mat-icon-button aria-label="Shopping cart" [routerLink]="'shopping-cart'">
       <mat-icon>shopping_cart</mat-icon>
     </button>
