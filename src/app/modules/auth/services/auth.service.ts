@@ -4,12 +4,9 @@ import {Observable, tap} from 'rxjs';
 
 import {urls} from '../../../../constants';
 import {
-  ILoginRequest,
-  ILoginResponse,
-  IMessageResponse,
-  IRefreshTokenResponse, IRegisterRequest
+  ILoginRequest, ILoginResponse,
+  IMessageResponse, IRefreshTokenResponse, IRegisterRequest
 } from '../interfaces';
-import {IUser} from "../../user/interfaces";
 
 
 @Injectable({
@@ -19,6 +16,7 @@ export class AuthService {
 
   private _accessTokenKey = 'access';
   private _refreshTokenKey = 'refresh';
+  private _shoppingCard = 'shopping-card';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -53,6 +51,7 @@ export class AuthService {
   clearToken(): void {
     localStorage.removeItem(this._accessTokenKey);
     localStorage.removeItem(this._refreshTokenKey);
+    this.setShoppingCard();
   }
 
   getAccessToken(): string {
@@ -86,5 +85,45 @@ export class AuthService {
     const nameFromToken = payload.sub;
 
     return nameFromToken;
+  }
+
+  addToShoppingCard(id: number): number {
+    const shoppingCard = this.getShoppingCard();
+    if (!shoppingCard.includes(id)) {
+      shoppingCard.push(id);
+      this.setShoppingCard(shoppingCard);
+    }
+    return shoppingCard.length;
+  }
+
+  removeFromShoppingCard(id: number | undefined): number {
+    if (!id) {
+      return 0;
+    }
+    let shoppingCard = this.getShoppingCard();
+    const index = shoppingCard.indexOf(id);
+    if (index > -1) {
+      shoppingCard = shoppingCard.filter(item => item !== id)
+      this.setShoppingCard(shoppingCard);
+    }
+    return shoppingCard.length;
+  }
+
+  getShoppingCard(): number[] {
+    const shoppingCardStorage = localStorage.getItem(this._shoppingCard);
+    if (shoppingCardStorage) {
+      return JSON.parse(shoppingCardStorage);
+    } else {
+      localStorage.setItem(this._shoppingCard, JSON.stringify([]));
+    }
+    return [];
+  }
+
+  setShoppingCard(shoppingCard?: number[]): void {
+    if (shoppingCard) {
+      localStorage.setItem(this._shoppingCard, JSON.stringify(shoppingCard));
+    } else {
+      localStorage.removeItem(this._shoppingCard);
+    }
   }
 }

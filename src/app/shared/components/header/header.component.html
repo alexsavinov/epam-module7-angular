@@ -9,25 +9,40 @@
 
     <!-- MENU -->
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="'certificates'">
+      <button mat-menu-item [routerLink]="'certificates'" class="menu-button">
         <mat-icon color="primary">card_giftcard</mat-icon>
         Gift certificates
       </button>
 
-      <button mat-menu-item [routerLink]="'tags'">
+      <button mat-menu-item [routerLink]="'tags'" class="menu-button">
         <mat-icon color="primary">sell</mat-icon>
         Tags
       </button>
 
-      <button *ngIf="isAuthenticated" mat-menu-item [routerLink]="'orders'">
-        <mat-icon color="primary">credit_card</mat-icon>
-        Orders
-      </button>
+      <div *ngIf="isAuthenticated">
 
-      <button *ngIf="isAuthenticated" mat-menu-item [routerLink]="'users'">
-        <mat-icon color="primary">people</mat-icon>
-        Users
-      </button>
+        <button mat-menu-item [routerLink]="'orders'" class="menu-button">
+          <mat-icon color="primary">credit_card</mat-icon>
+          Orders
+        </button>
+
+        <button mat-menu-item [routerLink]="'users'" class="menu-button">
+          <mat-icon color="primary">people</mat-icon>
+          Users
+        </button>
+
+        <hr>
+
+        <button mat-menu-item [routerLink]="'orders/user'" class="menu-button">
+          <mat-icon color="primary">credit_card</mat-icon>
+          My orders
+        </button>
+
+        <button mat-menu-item [routerLink]="'shopping-cart'" class="menu-button">
+          <mat-icon color="primary">shopping_cart</mat-icon>
+          Shopping cart
+        </button>
+      </div>
     </mat-menu>
 
     <!-- LOGO -->
@@ -45,14 +60,16 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button mat-icon-button aria-label="Shopping cart" [routerLink]="'shopping-cart'">
-      <mat-icon>shopping_cart</mat-icon>
+    <button mat-icon-button aria-label="Shopping cart" [routerLink]="'shopping-cart'" class="shopping-cart-button">
+      <mat-icon matBadge="{{shoppingCardSize}}" matBadgeHidden="{{shoppingCardSize === 0}}">
+        shopping_cart
+      </mat-icon>
     </button>
 
     <div class="nav-buttons">
       <button *ngIf="!isAuthenticated" mat-flat-button color="primary" [routerLink]="'auth/login'">Login</button>
       <button *ngIf="isAuthenticated" mat-flat-button color="primary" [routerLink]="'auth/profile'">
-        <mat-icon>person</mat-icon>
+        <mat-icon color="accent">person</mat-icon>
         {{username}}
       </button>
 

@@ -6,6 +6,8 @@ export interface ICertificate {
   description: string;
   price: number;
   duration: number;
+  createDate?: string;
+  lastUpdateDate?: string;
   tags: ITag[];
 }
 

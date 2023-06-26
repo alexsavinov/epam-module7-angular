@@ -1,0 +1,105 @@
+<main class="wrapper">
+
+  <!-- TITLE -->
+  <div class="title" [routerLink]="'/shopping-cart'">
+    <mat-icon color="primary">shopping_cart_checkout</mat-icon>
+    Shopping cart
+  </div>
+
+  <!--SELECTION LIST -->
+  <mat-selection-list #list>
+    <mat-list-option *ngFor="let certificate of certificates"
+                     id="{{certificate.id}}"
+                     togglePosition="before"
+                     color="primary"
+                     (click)="select(list.selectedOptions.selected)">
+
+      <!-- CARD -->
+      <mat-card class="mat-elevation-z3" class="card-item">
+
+        <!-- CARD HEADER -->
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon color="primary" class="mat-card">card_giftcard</mat-icon>
+          </div>
+          <mat-card-title> {{certificate.name}} </mat-card-title>
+          <mat-card-subtitle> {{certificate.description}} </mat-card-subtitle>
+        </mat-card-header>
+
+        <!-- CARD CONTENT -->
+        <mat-card-content>
+
+          <div class="order">
+            <div class="order-date">
+              {{certificate.createDate | date:'YYYY-MM-dd hh:mm'}}
+            </div>
+            <div>
+              <div> Duration: {{certificate.duration}} days</div>
+              <div> Expires in: {{expiredInDays(certificate)}} days</div>
+            </div>
+          </div>
+
+          <div class="order-details">
+            <div class="order-price">
+              {{certificate.price | currency}}
+            </div>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+    </mat-list-option>
+  </mat-selection-list>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    <div class="total">
+
+      <div class="total-item">
+        Total:
+        <span class="total-value">
+          {{totalSum | currency}}
+        </span>
+      </div>
+
+      <div class="total-item" *ngIf="list.selectedOptions.selected.length">
+        {{list.selectedOptions.selected.length}} selected:
+        <div class="total-value">
+          {{totalSumSelected | currency}}
+        </div>
+      </div>
+    </div>
+
+
+    <!-- BUTTONS -->
+    <div class="buttons">
+      <button mat-raised-button class="button-delete-cart"
+              [disabled]="!list.selectedOptions.selected.length"
+              (click)="delete(list.selectedOptions.selected)">
+        <mat-icon>delete</mat-icon>
+        Delete <span *ngIf="list.selectedOptions.selected.length">
+        {{list.selectedOptions.selected.length}}
+        item<span *ngIf="list.selectedOptions.selected.length > 1">s</span>
+      </span>
+      </button>
+
+      <button mat-raised-button color="primary"
+              [disabled]="!certificates.length"
+              (click)="checkout(list.selectedOptions.selected)">
+        <mat-icon>paid</mat-icon>
+        Checkout
+      </button>
+    </div>
+
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="info-message" *ngIf="infoMessage">
+    <div class="message" *ngFor="let message of infoMessage">{{message}}</div>
+  </div>
+  <div id="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+
+</main>

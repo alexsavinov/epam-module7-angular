@@ -33,6 +33,7 @@ export class LogoutComponent implements OnInit {
 
   logout(): void {
     this.clearMessages();
+    this.dataService.shoppingCardSize.next(0);
 
     this.authService.logout().subscribe({
       next: (value): void => {

@@ -11,6 +11,7 @@ import {AuthService, AuthDataService} from "../../../modules/auth/services";
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean;
   username: string;
+  shoppingCardSize: number;
 
   constructor(private authService: AuthService,
               private dataService: AuthDataService) {
@@ -19,8 +20,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.isAuthenticated.subscribe(value => this.isAuthenticated = value);
     this.dataService.username.subscribe(value => this.username = value);
+    this.dataService.shoppingCardSize.subscribe(value => this.shoppingCardSize = value);
     if (!this.isAuthenticated) {
       this.isAuthenticated = this.authService.isAuthenticated();
+      this.shoppingCardSize = this.authService.getShoppingCard().length;
     }
     if (this.isAuthenticated && !this.username) {
       this.username = this.authService.getUsername();

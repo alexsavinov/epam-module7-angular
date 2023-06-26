@@ -1,28 +1,67 @@
-.example-viewport {
-  height: 87vh;
-  //width: 500px;
-  border: 1px solid black;
+@import "../../../../../styles";
+
+main {
+  min-height: 81vh;
 }
 
-.viewport-wrapper{
+.header {
+  flex-direction: column;
+  margin-bottom: 0.2rem;
+}
+
+.title {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.mat-header-row, mat-paginator {
+  background-color: $primary-color100;
+}
+
+.mat-paginator {
+  background-color: $primary-color100;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: white !important;
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.spacer {
+  display: inline-block;
+  width: 1em;
+}
+
+.buttons {
   display: flex;
-  gap: 2em;
-  flex-wrap: wrap;
-  padding: 5em;
-  justify-content: center;
-
-}
-//.example-item {
-//  height: 100px;
-//}
-
-mat-card {
-  width: 20rem;
-  height: 20rem;
 }
 
-mat-card-header {
-  height: 2rem;
+.button-order {
+  min-width: 8rem;
+  background-color: $primary-color100;
+  border: 1px solid $primary-color800;
 
+  mat-icon {
+    font-size: 1.5em;
+    width: 1.1em;
+    color: $primary-color800;
+    margin: 0;
+    padding: 0;
+  }
 }
 
+.tag {
+  height: 1.6rem !important;
+  background-color: $accent-color100;
+  border-color: $primary-color500;
+  //color: $primary-color500;
+  border-radius: 2em;
+  font-size: 1rem;
+  margin: 0.1rem;
+  padding: 0.5rem;
+}

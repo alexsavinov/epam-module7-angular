@@ -16,7 +16,8 @@
   //font-style: italic;
   font-family: Roboto, sans-serif;
   font-size: 1.5em;
-  color: $primary-color100;
+  color: $primary-color50;
+  //color: white;
 }
 
 .nav-buttons {
@@ -38,5 +39,24 @@
 .vertical-divider {
   height: 1em;
   width: 1px;
-  background-color: white;
+  background-color: $primary-color50;
+}
+
+button {
+  color: $primary-color50;
+}
+
+.shopping-cart-button {
+  margin-right: 0.7rem;
+}
+
+::ng-deep .mat-badge-content {
+  background: red !important;
+  color: white !important;
+  font-family: Arial;
+  font-size: 1rem;
+}
+
+.menu-button {
+  color: $primary-color;
 }

@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
         this.isAuthenticated = this.authService.isAuthenticated();
         this.dataService.isAuthenticated.next(this.authService.isAuthenticated());
         this.dataService.username.next(this.authService.getUsername());
+        this.dataService.shoppingCardSize.next(0);
         setTimeout(() => this.router.navigate(['']), 2000);
       },
       error: e => {

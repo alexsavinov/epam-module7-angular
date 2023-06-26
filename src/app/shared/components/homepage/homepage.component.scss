@@ -1,5 +1,26 @@
 @import "../../../../styles";
 
 main {
-  min-height: 85vh;
+  min-height: 55vh;
+  display: flex;
+  justify-content: center;
+  gap: 10em;
+  background-color: $primary-color100;
+  padding: 10em;
 }
+
+.welcome-text {
+  padding-bottom: 2em;
+  font-size: 1.4rem;
+  color: $primary-color1000;
+
+}
+
+.button-search {
+  height: 5rem !important;
+  width: 20rem !important;
+  color: $primary-color50;
+  font-size: 1.5rem;
+  background-color: $primary-color600;
+}
+

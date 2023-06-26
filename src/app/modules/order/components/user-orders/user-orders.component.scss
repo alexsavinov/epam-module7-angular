@@ -1,0 +1,76 @@
+@import "../../../../../styles";
+
+main {
+  min-height: 79.6vh;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-header-row, mat-paginator {
+  background-color: $primary-color100;
+}
+
+.mat-paginator {
+  background-color: $primary-color100;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: white !important;
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+}
+
+.details {
+  width: 37rem;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 2rem;
+}
+
+.details-item {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  //padding: 2rem;
+  //gap: 2rem;
+  background-color: white;
+  border: 1px solid $primary-color100;
+  border-radius: 0.3rem;
+}
+
+.details-title {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: end;
+  background-color: $primary-color100;
+  color: $primary-color800;
+  font-size: 2rem;
+  padding: 0.75rem;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.details-value {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  box-sizing: border-box;
+  font-size: 3rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0 0 0.3rem 0.3rem;
+  color: $primary-color800;
+}

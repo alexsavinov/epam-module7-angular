@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {HomepageComponent, MainLayoutComponent, PagenotfoundComponent} from "./shared";
+import {HomepageComponent, MainLayoutComponent, PagenotfoundComponent, ShoppingCartComponent} from "./shared";
 
 
 const routes: Routes = [
@@ -10,6 +10,7 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {path: '', component: HomepageComponent},
+      {path: 'shopping-cart', component: ShoppingCartComponent},
       {path: 'auth', loadChildren: () => import('./modules').then(value => value.AuthModule)},
       {path: 'users', loadChildren: () => import('./modules').then(value => value.UserModule)},
       {path: 'tags', loadChildren: () => import('./modules').then(value => value.TagModule)},

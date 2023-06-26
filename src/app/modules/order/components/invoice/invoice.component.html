@@ -1,0 +1,54 @@
+<main class="wrapper" *ngIf="order && order.user">
+  <mat-icon (click)="back($event)">closes</mat-icon>
+
+  <div class="invoice">
+
+    <div class="invoice-title">
+
+      <div *ngIf="order.user">Invoice number: {{order.user.id}}-{{order.id}}</div>
+      <div>Invoice date: {{order.createDate | date:'YYYY-MM-dd'}}</div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="invoice-billed">
+      <b>Billed to:</b>
+      {{order.user.name}}
+    </div>
+
+    <table>
+
+      <thead>
+      <tr>
+        <th align="left">DESCRIPTION</th>
+        <th align="right">RATE</th>
+        <th align="right">QTY</th>
+        <th align="right">AMOUNT</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td>{{order.certificate?.name}}</td>
+        <td align="right">{{order.price | currency}}</td>
+        <td align="right">1</td>
+        <td align="right">{{order.price | currency}}</td>
+      </tr>
+      </tbody>
+
+      <tfoot>
+      <tr align="right">
+        <td></td>
+        <td></td>
+        <td>TOTAL</td>
+        <td>{{order.price | currency}}</td>
+      </tr>
+      </tfoot>
+
+    </table>
+
+
+  </div>
+
+</main>

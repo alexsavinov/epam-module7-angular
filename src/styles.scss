@@ -9,7 +9,7 @@ $my-app-primary: mat.define-palette(mat.$deep-purple-palette);
 //$my-app-primary: mat.define-palette(mat.$blue-gray-palette);
 //$my-app-primary: mat.define-palette(mat.$indigo-palette);
 //$my-app-primary: mat.define-palette(mat.$teal-palette);
-$my-app-accent: mat.define-palette(mat.$blue-palette);
+$my-app-accent: mat.define-palette(mat.$lime-palette);
 $my-app-warn: mat.define-palette(mat.$red-palette);
 
 $my-app-theme: mat.define-light-theme(
@@ -32,6 +32,9 @@ $warn-palette: map.get($color-config, 'warn');
 
 
 $primary-color: mat.get-color-from-palette($primary-palette, 500);
+$primary-color1000: mat.get-color-from-palette($primary-palette, 1000);
+$primary-color900: mat.get-color-from-palette($primary-palette, 900);
+$primary-color800: mat.get-color-from-palette($primary-palette, 800);
 $primary-color700: mat.get-color-from-palette($primary-palette, 700);
 $primary-color600: mat.get-color-from-palette($primary-palette, 600);
 $primary-color500: mat.get-color-from-palette($primary-palette, 500);

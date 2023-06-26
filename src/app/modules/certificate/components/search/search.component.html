@@ -1,58 +1,111 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. user" #input [(ngModel)]="input.value">
-  <button *ngIf="input.value" matSuffix mat-icon-button aria-label="Clear" (click)="input.value=''; setFilter('')">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
+<main class="wrapper">
 
-<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="600" maxBufferPx="1500" class="example-viewport">
-  <!--  <div *cdkVirtualFor="let item of dataSource" class="example-item">-->
+  <!-- HEADER -->
+  <div class="header">
+    <!--    <div class="title" [routerLink]="'/certificates'">-->
 
-  <div class="viewport-wrapper">
-
-    <!-- CARD -->
-    <mat-card *cdkVirtualFor="let item of dataSource" class="mat-elevation-z3" color="primary">
-
-      <!-- CARD HEADER -->
-      <mat-card-header *ngIf="item">
-
-        <div mat-card-avatar>
-          <mat-icon color="primary">card_giftcard</mat-icon>
-        </div>
-
-        <mat-card-title>Gift certificate</mat-card-title>
-        <mat-card-subtitle>Enter your credentials</mat-card-subtitle>
-      </mat-card-header>
-
-      <!-- CARD CONTENT -->
-      <mat-card-content *ngIf="item">
-        <div>ID: {{item.id}}</div>
-        <div>NAME: {{item.name}}</div>
-        <div>DESC: {{item.description}}</div>
-        <div *ngFor="let tag of item.tags">TAG: {{tag.name}}</div>
-      </mat-card-content>
-
-      <!-- CARD FOOTER -->
-      <mat-card-footer *ngIf="item">
-        <mat-card-actions>
-          <!--          <button mat-raised-button color="primary" type="submit" (click)="login()" [disabled]="form.invalid">-->
-          <!--            <mat-icon>login</mat-icon>-->
-          <!--            LOGIN-->
-          <!--          </button>-->
-        </mat-card-actions>
+    <!--    </div>-->
+    <mat-form-field>
+      <mat-label> Search by title, description and tags</mat-label>
+      <input matInput (keyup)="applyFilter($event)"
+             placeholder="For example, fluffy #(little cat) #(fun) - find certificates that tags “little cat” and “fun” and contain “fluffy” in title or description."
+             #input
+             [(ngModel)]="filterString">
+      <button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="filterString=''; setFilter('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 
 
-      </mat-card-footer>
-      <!--      -->
-      <div *ngIf="!item">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        Loading...
-      </div>
+  <!-- TABLE -->
+  <div class="mat-elevation-z3">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
-    </mat-card>
+      <!-- CreateDate Column -->
+      <ng-container matColumnDef="createDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+        <td mat-cell *matCellDef="let row"> {{row.createDate | date:'YYYY-MM-dd hh:mm'}} </td>
+      </ng-container>
 
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+        <td mat-cell *matCellDef="let row"> {{row.description}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let row"> {{row.price | currency}} </td>
+      </ng-container>
+
+      <!-- Duration Column -->
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
+        <td mat-cell *matCellDef="let row">
+          {{row.duration}} day<span *ngIf="row.duration != 1">s</span>
+        </td>
+      </ng-container>
+
+      <!-- Tags Column -->
+      <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tags</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-stroked-button class="tag" *ngFor="let tag of row.tags" (click)="filterTag(tag.name)">
+            {{tag.name}}
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Action buttons Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row">
+
+          <div class="buttons">
+            <button mat-stroked-button class="button-order" (click)="order(row.id)">
+              <mat-icon>shopping_cart</mat-icon>
+              Add to cart
+            </button>
+          </div>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data</td>
+      </tr>
+    </table>
+
+    <!-- PAGINATOR -->
+    <mat-paginator class="mat-paginator"
+                   [length]="totalElements"
+                   [pageIndex]="number"
+                   [pageSizeOptions]="[10, 20, 50]"
+                   [showFirstLastButtons]="true"
+                   (page)="pageEvent = getServerData($event)"
+                   aria-label="Select page of certificates">
+    </mat-paginator>
 
   </div>
-  <!--  </div>-->
-</cdk-virtual-scroll-viewport>
+
+  <!-- MESSAGES -->
+  <div id="info-message" *ngIf="infoMessage">
+    {{infoMessage}}
+  </div>
+  <div id="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+
+</main>

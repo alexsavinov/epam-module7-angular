@@ -3,23 +3,25 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {urls} from '../../../../constants';
-import {IPageable} from "../../../shared/interfaces";
 import {IUser, IUserCreateRequest, IUserUpdateRequest} from "../interfaces";
+import {IPageable} from "../../../shared/interfaces";
+import {SearchStringHelper} from "../../../shared";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  stringHelper = new SearchStringHelper();
+
   constructor(private httpClient: HttpClient) {
   }
 
   getAll(pageable?: IPageable): Observable<any> {
-    if (pageable) {
-      return this.httpClient.get<any>(`${urls.users}?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}`);
-    } else {
-      return this.httpClient.get<any>(`${urls.users}`);
-    }
+    const pageableString = this.stringHelper.pageableToString(pageable);
+    const searchString = this.stringHelper.suffix('?', pageableString) + pageableString;
+    return this.httpClient.get<any>(`${urls.users}${searchString}`);
   }
 
   getById(id: string): Observable<IUser> {

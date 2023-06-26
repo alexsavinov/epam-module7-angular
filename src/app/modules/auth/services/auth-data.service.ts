@@ -9,7 +9,7 @@ export class AuthDataService {
 
   isAuthenticated = new BehaviorSubject<boolean>(false);
   username = new BehaviorSubject<string>('');
-  // page = new BehaviorSubject<number>(0);
+  shoppingCardSize = new BehaviorSubject<number>(0);
 
   constructor() {
   }

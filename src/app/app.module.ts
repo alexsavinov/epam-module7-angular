@@ -8,16 +8,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {
-  MaterialModule,
-  MainInterceptor,
-  MainLayoutComponent,
-  HeaderComponent,
-  FooterComponent,
-  HomepageComponent,
-  PagenotfoundComponent,
-  ModalConfirmComponent
+  MaterialModule, MainInterceptor, MainLayoutComponent, HeaderComponent, FooterComponent, HomepageComponent,
+  PagenotfoundComponent, ModalConfirmComponent, ModalConfirmDeleteComponent, ShoppingCartComponent
 } from "./shared";
-import { ModalConfirmDeleteComponent } from './shared/components/modal-confirm-delete/modal-confirm-delete.component';
 
 
 @NgModule({
@@ -29,7 +22,8 @@ import { ModalConfirmDeleteComponent } from './shared/components/modal-confirm-d
     FooterComponent,
     PagenotfoundComponent,
     ModalConfirmComponent,
-    ModalConfirmDeleteComponent
+    ModalConfirmDeleteComponent,
+    ShoppingCartComponent
   ],
   imports: [
     AppRoutingModule,

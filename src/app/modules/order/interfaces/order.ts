@@ -16,6 +16,10 @@ export interface ICreateOrderRequest {
     price?: number;
 }
 
+export interface IHighestCost {
+    highestCost: number;
+}
+
 export function emptyOrder(): IOrder {
   return {
     certificate: undefined,

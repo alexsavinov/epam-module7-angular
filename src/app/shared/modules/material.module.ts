@@ -16,6 +16,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatSelectModule} from "@angular/material/select";
+import {MatBadgeModule} from "@angular/material/badge";
+import {MatListModule} from "@angular/material/list";
+import {MatRippleModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatTooltipModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatSelectModule
+    MatBadgeModule,
+    MatSelectModule,
+    MatListModule,
+    MatRippleModule
   ],
   exports: [
     MatButtonModule,
@@ -56,7 +62,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatTooltipModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatSelectModule
+    MatBadgeModule,
+    MatSelectModule,
+    MatListModule,
+    MatRippleModule
   ]
 })
 export class MaterialModule {

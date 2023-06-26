@@ -37,7 +37,8 @@
 
         <mat-form-field>
           <mat-label>USER</mat-label>
-          <input type="text" matInput formControlName="user" [errorStateMatcher]="matcher" placeholder="user" readonly>
+          <input type="text" matInput formControlName="user"
+                 [errorStateMatcher]="matcher" placeholder="user" readonly>
           <button mat-button matSuffix aria-label="select" (click)="selectUser($event)">
             <mat-icon class="select-icon">more_horiz</mat-icon>
           </button>
@@ -60,12 +61,12 @@
         </mat-form-field>
 
         <mat-form-field *ngIf="!creating">
-          <mat-label>LAST UPDATE DATE</mat-label>
+          <mat-label>CREATE DATE</mat-label>
           <input type="text" matInput formControlName="createDate" readonly>
         </mat-form-field>
 
         <mat-form-field *ngIf="!creating">
-          <mat-label>CREATE DATE</mat-label>
+          <mat-label>LAST UPDATE DATE</mat-label>
           <input type="text" matInput formControlName="lastUpdateDate" readonly>
         </mat-form-field>
 

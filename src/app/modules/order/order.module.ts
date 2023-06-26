@@ -5,12 +5,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OrderRoutingModule} from './order-routing.module';
 import {MaterialModule} from "../../shared";
 import {OrderComponent, OrdersComponent} from "./components";
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 
 @NgModule({
   declarations: [
     OrderComponent,
-    OrdersComponent
+    OrdersComponent,
+    UserOrdersComponent,
+    InvoiceComponent
   ],
   imports: [
     CommonModule,

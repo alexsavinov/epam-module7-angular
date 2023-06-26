@@ -3,8 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 import {urls} from "../../../../constants";
-import {IPageable} from "../../../shared/interfaces";
 import {ICertificate, ISearchRequest} from "../interfaces";
+import {IPageable} from "../../../shared/interfaces";
+import {SearchStringHelper} from "../../../shared";
+import {ILoginResponse} from "../../auth/interfaces";
 
 
 @Injectable({
@@ -12,23 +14,21 @@ import {ICertificate, ISearchRequest} from "../interfaces";
 })
 export class CertificateService {
 
+  stringHelper = new SearchStringHelper();
+
   constructor(private httpClient: HttpClient) {
   }
 
   getAll(pageable: IPageable): Observable<any> {
-    return this.httpClient.get<any>(`${urls.certificates}?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}`);
+    const pageableString = this.stringHelper.pageableToString(pageable);
+    const searchString = this.stringHelper.suffix('?', pageableString) + pageableString;
+    return this.httpClient.get<any>(`${urls.certificates}${searchString}`);
   }
 
   search(pageable: IPageable, searchRequest: ISearchRequest): Observable<any> {
-    let searchString: string = '';
-    if (searchRequest.name) {
-      searchString += `&name=${searchRequest.name}`;
-    }
-    if (searchRequest.tags) {
-      searchString += `&tags=${searchRequest.tags}`;
-    }
-    console.log(searchString)
-    return this.httpClient.get<any>(`${urls.certificates}/search/?page=${pageable.page}&size=${pageable.size}&sort=${pageable.sort},${pageable.direction}${searchString}`);
+    const searchString = this.stringHelper.searchString(pageable, searchRequest);
+    // console.log(searchString)
+    return this.httpClient.get<any>(`${urls.certificates}/search${searchString}`);
   }
 
   getById(id: string): Observable<ICertificate> {
