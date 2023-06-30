@@ -1,17 +1,17 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort, Sort} from "@angular/material/sort";
-import {MatDialog} from "@angular/material/dialog";
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
 
-import {IPageable} from "../../../../shared/interfaces";
-import {ICertificate} from "../../interfaces";
-import {AuthDataService, AuthService} from "../../../auth/services";
-import {CertificateService} from "../../services";
-import {ModalConfirmDeleteComponent} from "../../../../shared";
-import {EnumRole} from "../../../auth/interfaces";
-import {CertificateComponent} from "..";
+import {IPageable} from '../../../../shared/interfaces';
+import {ICertificate} from '../../interfaces';
+import {AuthDataService, AuthService} from '../../../auth/services';
+import {CertificateService} from '../../services';
+import {ModalConfirmDeleteComponent} from '../../../../shared';
+import {EnumRole} from '../../../auth/interfaces';
+import {CertificateComponent} from '..';
 
 
 @Component({

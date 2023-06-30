@@ -1,17 +1,17 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort, Sort} from "@angular/material/sort";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatSort, Sort} from '@angular/material/sort';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
-import {IPageable} from "../../../../shared/interfaces";
-import {IOrder} from "../../interfaces";
-import {emptyTag, ITag} from "../../../tag/interfaces";
-import {AuthService} from "../../../auth/services";
-import {OrderService} from "../../services";
-import {TagService} from "../../../tag/services";
-import {InvoiceComponent} from "..";
+import {IPageable} from '../../../../shared/interfaces';
+import {IOrder} from '../../interfaces';
+import {ITag} from '../../../tag/interfaces';
+import {AuthService} from '../../../auth/services';
+import {OrderService} from '../../services';
+import {TagService} from '../../../tag/services';
+import {InvoiceComponent} from '..';
 
 
 @Component({
@@ -57,17 +57,16 @@ export class UserOrdersComponent implements OnInit {
     this.userId = this.authService.getUserId();
 
     this.tagService.getTopUsedTag(this.userId).subscribe((data) => {
-      this.topUsedTag = data;
-},
+        this.topUsedTag = data;
+      },
       error => {
-            // this.topUsedTag = emptyTag();
       });
 
     this.orderService.getHighestCostByUserId(this.userId).subscribe((data) => {
-      this.highestCost = data.highestCost;
-    },
+        this.highestCost = data.highestCost;
+      },
       error => {
-            this.highestCost = 0;
+        this.highestCost = 0;
       });
 
     this.fetchData();
@@ -88,7 +87,6 @@ export class UserOrdersComponent implements OnInit {
       this.totalPages = data.totalPages;
       this.numberOfElements = data.numberOfElements;
     });
-
   }
 
   getServerData(event: PageEvent) {
@@ -105,16 +103,9 @@ export class UserOrdersComponent implements OnInit {
   }
 
   edit(id: number) {
-    const dialogRef = this.matDialog.open(
+    this.matDialog.open(
       InvoiceComponent,
       {data: {id: id, userId: this.userId}}
     );
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.fetchData();
-    //     this.infoMessage = `Order '${result}' was updated!`;
-    //   }
-    // });
   }
 }

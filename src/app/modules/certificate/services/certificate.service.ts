@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import {urls} from "../../../../constants";
-import {ICertificate, ISearchRequest} from "../interfaces";
-import {IPageable} from "../../../shared/interfaces";
-import {SearchStringHelper} from "../../../shared";
-import {ILoginResponse} from "../../auth/interfaces";
+import {urls} from '../../../../constants';
+import {ICertificate, ISearchRequest} from '../interfaces';
+import {IPageable} from '../../../shared/interfaces';
+import {SearchStringHelper} from '../../../shared';
 
 
 @Injectable({
@@ -27,7 +26,6 @@ export class CertificateService {
 
   search(pageable: IPageable, searchRequest: ISearchRequest): Observable<any> {
     const searchString = this.stringHelper.searchString(pageable, searchRequest);
-    // console.log(searchString)
     return this.httpClient.get<any>(`${urls.certificates}/search${searchString}`);
   }
 

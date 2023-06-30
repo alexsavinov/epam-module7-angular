@@ -3,9 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {urls} from '../../../../constants';
-import {IUser, IUserCreateRequest, IUserUpdateRequest} from "../interfaces";
-import {IPageable} from "../../../shared/interfaces";
-import {SearchStringHelper} from "../../../shared";
+import {IUser, IUserCreateRequest, IUserUpdateRequest} from '../interfaces';
+import {IPageable} from '../../../shared/interfaces';
+import {SearchStringHelper} from '../../../shared';
 
 
 @Injectable({

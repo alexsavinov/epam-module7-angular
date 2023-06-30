@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {TagsComponent} from "./components";
+import {TagsComponent} from './components';
 
 
 const routes: Routes = [

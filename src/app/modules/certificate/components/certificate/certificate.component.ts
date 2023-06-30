@@ -1,19 +1,18 @@
-import {Component, ElementRef, inject, Inject, OnInit, ViewChild} from '@angular/core';
-import {Location} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-
-import {emptyCertificate, ICertificate} from "../../interfaces";
-import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
-import {CertificateService} from "../../services";
-
+import {Component, inject, Inject, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {ITag} from "../../../tag/interfaces";
-import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
-import {AuthService} from "../../../auth/services";
-import {EnumRole} from "../../../auth/interfaces";
+
+import {emptyCertificate, ICertificate} from '../../interfaces';
+import {CustomErrorStateMatcher, ModalConfirmComponent} from '../../../../shared';
+import {CertificateService} from '../../services';
+import {ITag} from '../../../tag/interfaces';
+import {MatChipEditedEvent, MatChipInputEvent} from '@angular/material/chips';
+import {AuthService} from '../../../auth/services';
+import {EnumRole} from '../../../auth/interfaces';
 
 @Component({
   selector: 'app-certificate',
@@ -74,13 +73,9 @@ export class CertificateComponent implements OnInit {
     }
 
     const value = (event.value || '').trim();
-
-    // Add our fruit
     if (value) {
       this.certificate.tags.push({name: value});
     }
-
-    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -90,7 +85,6 @@ export class CertificateComponent implements OnInit {
     }
 
     const index = this.tags.indexOf(tag);
-
     if (index >= 0) {
       this.tags.splice(index, 1);
       this.announcer.announce(`Removed ${tag}`);

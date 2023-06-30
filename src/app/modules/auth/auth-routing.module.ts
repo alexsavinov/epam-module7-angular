@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {formGuard} from "../../shared";
-import {LoginComponent, LogoutComponent, ProfileComponent, RegisterComponent} from "./components";
+import {formGuard} from '../../shared';
+import {LoginComponent, LogoutComponent, ProfileComponent, RegisterComponent} from './components';
 
 
 const routes: Routes = [

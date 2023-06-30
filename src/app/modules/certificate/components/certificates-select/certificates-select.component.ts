@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatDialogRef} from '@angular/material/dialog';
 
-import {IPageable} from "../../../../shared/interfaces";
-import {ICertificate} from "../../interfaces";
-import {CertificateService} from "../../services";
+import {IPageable} from '../../../../shared/interfaces';
+import {ICertificate} from '../../interfaces';
+import {CertificateService} from '../../services';
 
 
 @Component({

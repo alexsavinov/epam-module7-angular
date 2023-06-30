@@ -1,15 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {emptyOrder, ICreateOrderRequest, IOrder} from "../../interfaces";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {IUser} from "../../../user/interfaces";
-import {ICertificate} from "../../../certificate/interfaces";
-import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
-import {OrderService} from "../../services";
-import {UserService} from "../../../user/services";
-import {CertificateService} from "../../../certificate/services";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {UsersSelectComponent} from "../../../user/components";
-import {CertificatesSelectComponent} from "../../../certificate/components";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
+import {IOrder} from '../../interfaces';
+import {OrderService} from '../../services';
+
 
 @Component({
   selector: 'app-invoice',
@@ -36,8 +30,6 @@ export class InvoiceComponent implements OnInit {
 
   back(event: MouseEvent) {
     event.preventDefault();
-
     this.dialogRef.close(false)
   }
-
 }

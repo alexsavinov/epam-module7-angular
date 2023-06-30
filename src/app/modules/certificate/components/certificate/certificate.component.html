@@ -31,6 +31,7 @@
           <input type="text" matInput formControlName="name" [readonly]="!hasRoleAdmin"
                  [errorStateMatcher]="matcher" placeholder="name">
           <mat-error *ngIf="form.controls['name'].hasError('minlength')
+       || !form.controls['name'].hasError('maxLength')
        && !form.controls['name'].hasError('required')">
             Please enter a valid name
           </mat-error>
@@ -47,7 +48,8 @@
                     [errorStateMatcher]="matcher">
             {{certificate.description}}
           </textarea>
-          <mat-error *ngIf="form.controls['name'].hasError('minlength')
+          <mat-error *ngIf="form.controls['description'].hasError('minlength')
+       || !form.controls['description'].hasError('maxLength')
        && !form.controls['description'].hasError('required')">
             Please enter a valid description
           </mat-error>

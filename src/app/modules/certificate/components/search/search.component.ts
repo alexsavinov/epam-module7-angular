@@ -5,17 +5,17 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort, Sort} from "@angular/material/sort";
-import {Subject} from "rxjs";
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatSort, Sort} from '@angular/material/sort';
+import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
-import {IPageable} from "../../../../shared/interfaces";
-import {ICertificate, ISearchRequest} from "../../interfaces";
-import {CertificateService} from "../../services";
-import {AuthDataService, AuthService} from "../../../auth/services";
+import {IPageable} from '../../../../shared/interfaces';
+import {ICertificate, ISearchRequest} from '../../interfaces';
+import {CertificateService} from '../../services';
+import {AuthDataService, AuthService} from '../../../auth/services';
 
 
 @Component({

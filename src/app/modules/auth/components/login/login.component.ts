@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {CustomErrorStateMatcher} from "../../../../shared";
-import {AuthService} from "../../services/auth.service";
-import {AuthDataService} from "../../services";
+import {CustomErrorStateMatcher} from '../../../../shared';
+import {AuthDataService, AuthService} from '../../services';
 
 
 @Component({
@@ -29,25 +28,20 @@ export class LoginComponent implements OnInit {
   _createForm(): void {
     this.form = new FormGroup({
       username: new FormControl(
-        'user3',
-        // 'user2',
+        '',
         [
           Validators.required,
-          Validators.minLength(4)
+          Validators.minLength(3),
+          Validators.maxLength(30)
         ]),
-      // email: new FormControl(
-      //   null,
-      //   [
-      //     Validators.required,
-      //     Validators.email
-      //   ]),
       password: new FormControl(
-        // 'user2',
-        'user3',
+        '',
         [
           Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(30),
           // Validators.pattern(
-          //   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+          //   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{4,}/
           // ),
         ]),
     })
@@ -63,14 +57,12 @@ export class LoginComponent implements OnInit {
     this.infoMessage = '';
 
     const rawValue = this.form.getRawValue();
-    // console.log(rawValue)
     if (!rawValue) {
       return;
     }
 
     this.authService.login(rawValue).subscribe({
       next: (value) => {
-        // console.log(value)
         this.isLoading = true;
         this.authService.saveToken(value);
         this.infoMessage = 'Login successful! Redirecting to homepage..';
@@ -81,7 +73,7 @@ export class LoginComponent implements OnInit {
         setTimeout(() => this.router.navigate(['']), 2000);
       },
       error: e => {
-        this.errorMessage = e.message + " - Incorrect username or password!";
+        this.errorMessage = e.message + ' - Incorrect username or password!';
       }
     })
   }

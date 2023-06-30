@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {CertificatesComponent, SearchComponent} from "./components";
+import {CertificatesComponent, SearchComponent} from './components';
 
 
 const routes: Routes = [

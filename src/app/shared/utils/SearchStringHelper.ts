@@ -1,5 +1,5 @@
-import {IPageable} from "../interfaces";
-import {ISearchRequest} from "../../modules/certificate/interfaces";
+import {IPageable} from '../interfaces';
+import {ISearchRequest} from '../../modules/certificate/interfaces';
 
 
 export class SearchStringHelper {

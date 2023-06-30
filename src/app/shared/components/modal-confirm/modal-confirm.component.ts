@@ -1,5 +1,5 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Component} from '@angular/core';
+import {MatDialogRef} from '@angular/material/dialog';
 
 
 @Component({
@@ -9,17 +9,10 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class ModalConfirmComponent {
 
-  constructor(public dialogRef: MatDialogRef<ModalConfirmComponent>,
-              // @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-              ) {
+  constructor(public dialogRef: MatDialogRef<ModalConfirmComponent>) {
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 }
-
-// export interface DialogData {
-//   animal: string;
-//   name: string;
-// }

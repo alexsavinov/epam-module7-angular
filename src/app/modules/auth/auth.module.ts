@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
 
-import {MaterialModule} from "../../shared";
+import {MaterialModule} from '../../shared';
 import {AuthRoutingModule} from './auth-routing.module';
-import {LoginComponent, LogoutComponent, ProfileComponent, RegisterComponent} from "./components";
+import {LoginComponent, LogoutComponent, ProfileComponent, RegisterComponent} from './components';
 
 
 @NgModule({

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import {urls} from "../../../../constants";
-import {ITag} from "../interfaces";
-import {IPageable} from "../../../shared/interfaces";
-import {SearchStringHelper} from "../../../shared";
+import {urls} from '../../../../constants';
+import {ITag} from '../interfaces';
+import {IPageable} from '../../../shared/interfaces';
+import {SearchStringHelper} from '../../../shared';
 
 
 @Injectable({

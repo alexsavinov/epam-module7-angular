@@ -1,11 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {UserRoutingModule} from './user-routing.module';
-import {UserComponent, UsersComponent} from "./components";
-import {MaterialModule} from "../../shared";
-import { UsersSelectComponent } from './components/users-select/users-select.component';
+import {UserComponent, UsersComponent, UsersSelectComponent} from './components';
+import {MaterialModule} from '../../shared';
 
 
 @NgModule({
@@ -14,13 +13,13 @@ import { UsersSelectComponent } from './components/users-select/users-select.com
     UserComponent,
     UsersSelectComponent
   ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        MaterialModule,
-        FormsModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class UserModule {
 }

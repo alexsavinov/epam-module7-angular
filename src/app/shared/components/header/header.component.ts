@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {AuthDataService, AuthService} from "../../../modules/auth/services";
-import {EnumRole} from "../../../modules/auth/interfaces";
+import {AuthDataService, AuthService} from '../../../modules/auth/services';
+import {EnumRole} from '../../../modules/auth/interfaces';
 
 
 @Component({

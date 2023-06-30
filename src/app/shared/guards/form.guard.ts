@@ -1,21 +1,15 @@
 import {CanDeactivateFn} from '@angular/router';
-import {inject} from "@angular/core";
-import {MatDialog} from "@angular/material/dialog";
-import {map, Observable} from "rxjs";
+import {inject} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {map, Observable} from 'rxjs';
 
-import {RegisterComponent} from "../../modules/auth/components";
-import {ModalConfirmComponent} from "..";
+import {RegisterComponent} from '../../modules/auth/components';
+import {ModalConfirmComponent} from '..';
+
 
 export const formGuard: CanDeactivateFn<unknown> = (component, currentRoute, currentState, nextState) => {
-
-  // console.log(currentRoute)
-  // console.log(currentState)
-  // console.log(nextState.url)
-  // console.log(currentState.url)
-
   if (checkUrl(currentState.url)) {
     const {form} = component as RegisterComponent;
-
     if (form.dirty) {
       return openConfirmDialog();
     }

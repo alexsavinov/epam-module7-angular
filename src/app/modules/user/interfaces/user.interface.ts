@@ -1,4 +1,4 @@
-import {IRole} from "../../auth/interfaces";
+import {IRole} from '../../auth/interfaces';
 
 export interface IUser {
   id?: number;
@@ -23,15 +23,6 @@ export interface IUserCreateRequest {
   password?: string;
   email?: string;
   roles: string[];
-}
-
-export interface IServerResponseUsers {
-  total_items: number;
-  total_pages: number;
-  page_number: number;
-  prev: string;
-  next: string;
-  data: IUser[];
 }
 
 export function emptyUser(): IUser {

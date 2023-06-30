@@ -1,14 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Location} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 
-import {emptyUser, IUser, IUserCreateRequest, IUserUpdateRequest} from "../../interfaces";
-import {IRole} from "../../../auth/interfaces";
-import {UserService} from "../../services";
-import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {map} from "rxjs";
+import {emptyUser, IUser, IUserCreateRequest, IUserUpdateRequest} from '../../interfaces';
+import {IRole} from '../../../auth/interfaces';
+import {UserService} from '../../services';
+import {CustomErrorStateMatcher, ModalConfirmComponent} from '../../../../shared';
 
 
 @Component({
@@ -40,41 +39,20 @@ export class UserComponent implements OnInit {
 
 
   ngOnInit() {
-    // console.log(this.data)
     if (this.data) {
       if (this.data['creating']) {
         this.creating = true;
         this.user = emptyUser();
         this._createForm();
       } else {
-        // console.log(this.data['creating'])
         const id: string = this.data['id'].toString();
         this.userService.getById(id).subscribe(data => {
           this.user = data as IUser;
-          // console.log(this.user)
           this.roles = data.roles?.map((role: IRole) => role.name).join(', ');
           this._createForm();
         });
       }
     }
-
-
-    // if (this.router.url == '/users/add') {
-    //   this.creating = true;
-    // }
-    //
-    // if (this.creating) {
-    //   this.user = emptyUser();
-    //   this._createForm();
-    // } else {
-    //   this.activatedRoute.params.subscribe(({id}) => {
-    //     this.activatedRoute.data.subscribe(({data}) => {
-    //       this.user = data as IUser;
-    //       this.roles = data.roles.map((role: IRole) => role.name).join(', ');
-    //       this._createForm();
-    //     });
-    //   });
-    // }
   }
 
   _createForm(): void {
@@ -102,22 +80,16 @@ export class UserComponent implements OnInit {
         '',
         [
           (this.creating == true ? Validators.required : Validators.nullValidator)
-          // Validators.pattern(
-          //   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
-          // ),
         ])
     })
   }
 
   back(event: MouseEvent) {
     event.preventDefault();
-    // this.location.back();
 
     if (this.form.dirty) {
       const dialogRef = this.matDialog.open(ModalConfirmComponent);
-      // dialogRef.afterClosed().pipe(map(result => result != undefined))
       dialogRef.afterClosed().subscribe(result => {
-        // console.log('The dialog was closed ' + result);
         if (result) {
           this.dialogRef.close(false);
         }
@@ -125,9 +97,6 @@ export class UserComponent implements OnInit {
     } else {
       this.dialogRef.close(false)
     }
-
-    // this.dialogRef.close();
-    // this.router.navigate(['users']);
   }
 
   onSubmit(form: FormGroup) {
@@ -156,8 +125,6 @@ export class UserComponent implements OnInit {
           this.user = value;
           setTimeout(() => {
             this.form.reset();
-            // this.router.navigate(['users/' + value.id]);
-            // this.router.navigate(['users']);
             this.dialogRef.close(value.name);
           }, 2000);
         },

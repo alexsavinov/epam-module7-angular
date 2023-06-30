@@ -1,14 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from "@angular/common";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 
-import {emptyTag, ITag} from "../../interfaces";
-import {TagService} from "../../services";
-import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
-import {EnumRole} from "../../../auth/interfaces";
-import {AuthService} from "../../../auth/services";
+import {emptyTag, ITag} from '../../interfaces';
+import {TagService} from '../../services';
+import {CustomErrorStateMatcher, ModalConfirmComponent} from '../../../../shared';
+import {EnumRole} from '../../../auth/interfaces';
+import {AuthService} from '../../../auth/services';
 
 
 @Component({

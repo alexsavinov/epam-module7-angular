@@ -1,19 +1,15 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {ICertificate} from "../../../modules/certificate/interfaces";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort, Sort} from "@angular/material/sort";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthDataService, AuthService} from "../../../modules/auth/services";
-import {CertificateService} from "../../../modules/certificate/services";
-import {MatDialog} from "@angular/material/dialog";
-import {IPageable} from "../../interfaces";
-import {ModalConfirmDeleteComponent} from "../modal-confirm-delete/modal-confirm-delete.component";
-import {CertificateComponent} from "../../../modules/certificate/components";
-import {ICreateOrderRequest} from "../../../modules/order/interfaces";
-import {OrderService} from "../../../modules/order/services";
-import {MatListOption, MatSelectionList} from "@angular/material/list";
-import {EnumRole} from "../../../modules/auth/interfaces";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatListOption} from '@angular/material/list';
+
+import {ICertificate} from '../../../modules/certificate/interfaces';
+import {ICreateOrderRequest} from '../../../modules/order/interfaces';
+import {AuthDataService, AuthService} from '../../../modules/auth/services';
+import {CertificateService} from '../../../modules/certificate/services';
+import {OrderService} from '../../../modules/order/services';
+
 
 @Component({
   selector: 'app-shopping-cart',
@@ -97,7 +93,6 @@ export class ShoppingCartComponent implements OnInit {
   createOrder(index: number, orderRequest: ICreateOrderRequest, id: number) {
     return (function (context, ind) {
       setTimeout(function () {
-        // console.log(ind);
         context.orderService.create(orderRequest).subscribe({
             next: (value) => {
               context.infoMessage.push(`Order '${value.certificate?.name}' created (id=${value.id}).`);

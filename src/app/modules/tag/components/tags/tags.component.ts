@@ -1,17 +1,17 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort, Sort} from "@angular/material/sort";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatSort, Sort} from '@angular/material/sort';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
-import {IPageable} from "../../../../shared/interfaces";
-import {ITag} from "../../interfaces";
-import {AuthDataService, AuthService} from "../../../auth/services";
-import {ModalConfirmDeleteComponent} from "../../../../shared";
-import {TagService} from "../../services";
-import {TagComponent} from "../tag/tag.component";
-import {EnumRole} from "../../../auth/interfaces";
+import {IPageable} from '../../../../shared/interfaces';
+import {ITag} from '../../interfaces';
+import {AuthDataService, AuthService} from '../../../auth/services';
+import {ModalConfirmDeleteComponent} from '../../../../shared';
+import {TagService} from '../../services';
+import {TagComponent} from '../tag/tag.component';
+import {EnumRole} from '../../../auth/interfaces';
 
 
 @Component({
@@ -73,9 +73,13 @@ export class TagsComponent implements OnInit {
     });
   }
 
-  delete(id: number) {
+  private clearMessages() {
     this.errorMessage = '';
     this.infoMessage = '';
+  }
+
+  delete(id: number) {
+    this.clearMessages();
 
     const dialogRef = this.matDialog.open(ModalConfirmDeleteComponent);
 
@@ -108,6 +112,8 @@ export class TagsComponent implements OnInit {
   }
 
   create() {
+    this.clearMessages();
+
     const dialogRef = this.matDialog.open(
       TagComponent,
       {data: {id: undefined, creating: true}}
@@ -122,6 +128,8 @@ export class TagsComponent implements OnInit {
   }
 
   edit(id: number) {
+    this.clearMessages();
+
     const dialogRef = this.matDialog.open(
       TagComponent,
       {data: {id: id, creating: false}}

@@ -6,6 +6,7 @@ export * from './components/homepage/homepage.component';
 export * from './components/main-layout/main-layout.component';
 export * from './components/pagenotfound/pagenotfound.component';
 export * from './components/shopping-cart/shopping-cart.component';
+export * from './components/access-denied-page/access-denied-page.component';
 
 export * from './utils/CustomErrorStateMatcher';
 export * from './utils/SearchStringHelper';

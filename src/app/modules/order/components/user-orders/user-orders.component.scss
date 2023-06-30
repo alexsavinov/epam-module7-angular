@@ -45,11 +45,6 @@ mat-form-field {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  //padding: 2rem;
-  //gap: 2rem;
-  //background-color: white;
-  //border: 1px solid $primary-color100;
-  //border-radius: 0.3rem;
 }
 
 .details-title {
@@ -57,12 +52,9 @@ mat-form-field {
   display: flex;
   box-sizing: border-box;
   justify-content: center;
-  //background-color: $primary-color50;
-
   color: $primary-color900;
   font-size: 2.3rem;
   padding: 0.75rem;
-  //border-radius: 0.3rem 0.3rem 0 0;
 }
 
 .details-value {
@@ -72,9 +64,7 @@ mat-form-field {
   box-sizing: border-box;
   font-size: 2rem;
   padding: 1rem;
-  //background-color: white;
   background-color: $accent-color400;
-  //border-radius: 0 0 0.3rem 0.3rem;
   border: 1px solid $primary-color400;
   border-radius: 0.3rem;
   color: $primary-color800;

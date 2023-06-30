@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {Location} from "@angular/common";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {emptyUser, IUser} from "../../../user/interfaces";
-import {CustomErrorStateMatcher} from "../../../../shared";
-import {EnumRole, IRegisterRequest} from "../../interfaces";
-import {AuthService} from "../../services";
+import {emptyUser, IUser} from '../../../user/interfaces';
+import {CustomErrorStateMatcher} from '../../../../shared';
+import {EnumRole, IRegisterRequest} from '../../interfaces';
+import {AuthService} from '../../services';
 
 
 @Component({
@@ -39,13 +39,15 @@ export class RegisterComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(4)
+          Validators.minLength(3),
+          Validators.maxLength(30)
         ]),
       username: new FormControl(
         '',
         [
           Validators.required,
-          Validators.minLength(4)
+          Validators.minLength(3),
+          Validators.maxLength(30)
         ]),
       email: new FormControl(
         '',
@@ -57,17 +59,21 @@ export class RegisterComponent implements OnInit {
         '',
         [
           Validators.required,
-          // Validators.pattern(
-          //   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
-          // ),
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          Validators.pattern(
+            /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{4,}/
+          ),
         ]),
       passwordConfirm: new FormControl(
         '',
         [
           Validators.required,
-          // Validators.pattern(
-          //   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
-          // ),
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          Validators.pattern(
+            /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{4,}/
+          ),
         ]),
     })
   }

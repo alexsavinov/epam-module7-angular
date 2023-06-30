@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {HomepageComponent, MainLayoutComponent, PagenotfoundComponent, ShoppingCartComponent} from "./shared";
-import {AccessDeniedPageComponent} from "./shared/components/access-denied-page/access-denied-page.component";
+import {HomepageComponent, MainLayoutComponent, PagenotfoundComponent, ShoppingCartComponent} from './shared';
+import {AccessDeniedPageComponent} from './shared/components/access-denied-page/access-denied-page.component';
 
 
 const routes: Routes = [

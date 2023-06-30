@@ -1,16 +1,16 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 
-import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
-import {emptyOrder, ICreateOrderRequest, IOrder} from "../../interfaces";
-import {OrderService} from "../../services";
-import {IUser} from "../../../user/interfaces";
-import {ICertificate} from "../../../certificate/interfaces";
-import {UsersSelectComponent} from "../../../user/components";
-import {UserService} from "../../../user/services";
-import {CertificatesSelectComponent} from "../../../certificate/components";
-import {CertificateService} from "../../../certificate/services";
+import {IUser} from '../../../user/interfaces';
+import {ICertificate} from '../../../certificate/interfaces';
+import {emptyOrder, ICreateOrderRequest, IOrder} from '../../interfaces';
+import {CustomErrorStateMatcher, ModalConfirmComponent} from '../../../../shared';
+import {OrderService} from '../../services';
+import {UsersSelectComponent} from '../../../user/components';
+import {UserService} from '../../../user/services';
+import {CertificatesSelectComponent} from '../../../certificate/components';
+import {CertificateService} from '../../../certificate/services';
 
 @Component({
   selector: 'app-order',
@@ -79,17 +79,9 @@ export class OrderComponent implements OnInit {
           Validators.min(0)
         ]),
       createDate: new FormControl(
-        this.order.createDate,
-        [
-          // Validators.required,
-          // Validators.minLength(4)
-        ]),
+        this.order.createDate),
       lastUpdateDate: new FormControl(
-        this.order.lastUpdateDate,
-        [
-          // Validators.required,
-          // Validators.minLength(4)
-        ])
+        this.order.lastUpdateDate)
     })
   }
 
@@ -171,7 +163,6 @@ export class OrderComponent implements OnInit {
 
   selectUser(event: Event) {
     event.preventDefault();
-
     const dialogRef = this.matDialog.open(UsersSelectComponent);
 
     dialogRef.afterClosed().subscribe(userId => {
@@ -182,7 +173,6 @@ export class OrderComponent implements OnInit {
         });
       }
     });
-
   }
 
   selectCertificate(event: Event) {

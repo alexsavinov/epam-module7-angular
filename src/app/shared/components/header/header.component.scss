@@ -12,24 +12,16 @@
 }
 
 .title {
-  //font-weight: bold;
-  //font-style: italic;
   font-family: Roboto, sans-serif;
   font-size: 1.5em;
   color: $primary-color50;
-  //color: white;
 }
 
 .nav-buttons {
-  /*height: 2em;*/
   display: flex;
   align-items: stretch;
   align-content: center;
 }
-
-/*.nav-btn:hover {*/
-/*  border: 1px solid #7790fa;*/
-/*}*/
 
 .vertical-divider-wrapper {
   display: flex;

@@ -1,4 +1,4 @@
-import {ITag} from "../../tag/interfaces";
+import {ITag} from '../../tag/interfaces';
 
 export interface ICertificate {
   id?: number;

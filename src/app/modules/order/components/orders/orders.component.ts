@@ -1,17 +1,17 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatSort, Sort} from "@angular/material/sort";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
-import {IOrder} from "../../interfaces";
-import {IPageable} from "../../../../shared/interfaces";
-import {OrderComponent} from "../order/order.component";
-import {ModalConfirmDeleteComponent} from "../../../../shared";
-import {AuthDataService, AuthService} from "../../../auth/services";
-import {OrderService} from "../../services";
-import {EnumRole} from "../../../auth/interfaces";
+import {IOrder} from '../../interfaces';
+import {IPageable} from '../../../../shared/interfaces';
+import {OrderComponent} from '../order/order.component';
+import {ModalConfirmDeleteComponent} from '../../../../shared';
+import {AuthDataService, AuthService} from '../../../auth/services';
+import {OrderService} from '../../services';
+import {EnumRole} from '../../../auth/interfaces';
 
 @Component({
   selector: 'app-orders',

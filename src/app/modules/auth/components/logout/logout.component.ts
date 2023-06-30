@@ -1,25 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService, AuthDataService} from "../../services";
-import {Router} from "@angular/router";
-import {emptyLoginResponse} from "../../interfaces";
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+
+import {AuthService, AuthDataService} from '../../services';
+
 
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss']
 })
-export class LogoutComponent implements OnInit {
-  // isAuthenticated: boolean;
+export class LogoutComponent {
   infoMessage: string;
   errorMessage: string;
 
   constructor(private dataService: AuthDataService,
               private authService: AuthService,
               private router: Router) {
-  }
-
-  ngOnInit() {
-    // this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   clearMessages(): void {
@@ -37,10 +33,7 @@ export class LogoutComponent implements OnInit {
 
     this.authService.logout().subscribe({
       next: (value): void => {
-        // console.log(value)
-        // this.dataService.profile.next(emptyLoginResponse());
         this.infoMessage = `${value.message} Redirecting to login page..`;
-        // this.isAuthenticated = false;
         this.dataService.isAuthenticated.next(false);
         this.authService.clearToken();
         this.redirectToLoginPageWithTimeout();

@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatDialogRef} from '@angular/material/dialog';
 
-import {IUser} from "../../interfaces";
-import {IPageable} from "../../../../shared/interfaces";
-import {UserService} from "../../services";
+import {IUser} from '../../interfaces';
+import {IPageable} from '../../../../shared/interfaces';
+import {UserService} from '../../services';
 
 @Component({
   selector: 'app-users-select',

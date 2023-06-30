@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {AppRoutingModule} from "./app-routing.module";
+import {AppRoutingModule} from './app-routing.module';
 import {
   MaterialModule,
   AuthInterceptor,
@@ -17,9 +17,9 @@ import {
   PagenotfoundComponent,
   ModalConfirmComponent,
   ModalConfirmDeleteComponent,
-  ShoppingCartComponent
-} from "./shared";
-import { AccessDeniedPageComponent } from './shared/components/access-denied-page/access-denied-page.component';
+  ShoppingCartComponent,
+  AccessDeniedPageComponent
+} from './shared';
 
 
 @NgModule({

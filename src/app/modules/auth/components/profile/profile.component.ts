@@ -1,11 +1,11 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common'
 
-import {IUser} from "../../../user/interfaces";
-import {EnumRole, IRole} from "../../interfaces";
-import {AuthService} from "../../services";
-import {UserService} from "../../../user/services";
+import {IUser} from '../../../user/interfaces';
+import {IRole} from '../../interfaces';
+import {AuthService} from '../../services';
+import {UserService} from '../../../user/services';
 
 
 @Component({

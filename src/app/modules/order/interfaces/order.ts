@@ -1,5 +1,5 @@
-import {IUser} from "../../user/interfaces";
-import {ICertificate} from "../../certificate/interfaces";
+import {IUser} from '../../user/interfaces';
+import {ICertificate} from '../../certificate/interfaces';
 
 export interface IOrder {
     id?: number;

@@ -19,32 +19,23 @@
 
       <!-- CARD CONTENT -->
       <mat-card-content>
+
+        <!-- USERNAME -->
         <mat-form-field>
           <mat-label>Username</mat-label>
           <input type="text" matInput formControlName="username"
                  [errorStateMatcher]="matcher" placeholder="username">
           <mat-error *ngIf="form.controls['username'].hasError('minlength')
+       || form.controls['username'].hasError('maxlength')
        && !form.controls['username'].hasError('required')">
-            Please enter a valid username
+            Please enter a valid username (8-30 chars)
           </mat-error>
           <mat-error *ngIf="form.controls['username'].hasError('required')">
             Username is <strong>required</strong>
           </mat-error>
         </mat-form-field>
 
-        <!--        <mat-label>Email</mat-label>-->
-        <!--        <input type="email" matInput formControlName="email"-->
-        <!--               [errorStateMatcher]="matcher" placeholder="user@example.com">-->
-        <!--        <mat-error *ngIf="form.controls['email'].hasError('email')-->
-        <!--       && !form.controls['email'].hasError('required')">-->
-        <!--          Please enter a valid email address-->
-        <!--        </mat-error>-->
-        <!--        <mat-error *ngIf="form.controls['email'].hasError('required')">-->
-        <!--          Email is <strong>required</strong>-->
-        <!--        </mat-error>-->
-        <!--      </mat-form-field>-->
-
-
+        <!-- PASSWORD -->
         <mat-form-field>
           <mat-label>Password</mat-label>
 
@@ -60,12 +51,11 @@
 
           <mat-error class="password-error" *ngIf=
             "form.controls['password'].hasError('pattern')
+       || form.controls['password'].hasError('minlength')
+       || form.controls['password'].hasError('maxlength')
        && !form.controls['password'].hasError('required')">
-            Min 8 chars, 1 lowercase/uppercase/special.
+            4-30 chars, 1 lowercase/uppercase/special.
           </mat-error>
-          <!--          Required minimum of 8 characters, contains at least one lowercase letter,-->
-          <!--          one uppercase letter, one number, and one special character-->
-
           <mat-error *ngIf="form.controls['password'].hasError('required')">
             Password is <strong>required</strong>
           </mat-error>
@@ -81,8 +71,8 @@
             LOGIN
           </button>
         </mat-card-actions>
-
       </mat-card-footer>
+
       <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 
     </mat-card>

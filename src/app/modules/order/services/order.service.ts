@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import {urls} from "../../../../constants";
-import {ICreateOrderRequest, IHighestCost, IOrder} from "../interfaces";
-import {IPageable} from "../../../shared/interfaces";
-import {SearchStringHelper} from "../../../shared";
+import {urls} from '../../../../constants';
+import {ICreateOrderRequest, IHighestCost, IOrder} from '../interfaces';
+import {IPageable} from '../../../shared/interfaces';
+import {SearchStringHelper} from '../../../shared';
 
 
 @Injectable({
@@ -37,10 +37,8 @@ export class OrderService {
   }
 
   getAllByUserId(userId: string, pageable: IPageable): Observable<any> {
-      // getAll(pageable: IPageable): Observable<any> {
     const pageableString = this.stringHelper.pageableToString(pageable);
     const searchString = this.stringHelper.suffix('?', pageableString) + pageableString;
-    // return this.httpClient.get<any>(`${urls.orders}${searchString}`);
     return this.httpClient.get<any>(`${urls.orders}/user${searchString}&userId=${userId}`);
   }
 
