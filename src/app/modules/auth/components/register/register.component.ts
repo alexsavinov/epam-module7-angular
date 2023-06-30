@@ -36,25 +36,25 @@ export class RegisterComponent implements OnInit {
   _createForm(): void {
     this.form = new FormGroup({
       name: new FormControl(
-        'a user #3',
+        '',
         [
           Validators.required,
           Validators.minLength(4)
         ]),
       username: new FormControl(
-        'user3',
+        '',
         [
           Validators.required,
           Validators.minLength(4)
         ]),
       email: new FormControl(
-        'null@mail.com',
+        '',
         [
           Validators.required,
           Validators.email
         ]),
       password: new FormControl(
-        'user3',
+        '',
         [
           Validators.required,
           // Validators.pattern(
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
           // ),
         ]),
       passwordConfirm: new FormControl(
-        'user3',
+        '',
         [
           Validators.required,
           // Validators.pattern(

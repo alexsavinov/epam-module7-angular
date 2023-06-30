@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {AuthService, AuthDataService} from "../../../modules/auth/services";
+import {AuthDataService, AuthService} from "../../../modules/auth/services";
+import {EnumRole} from "../../../modules/auth/interfaces";
 
 
 @Component({
@@ -10,6 +11,7 @@ import {AuthService, AuthDataService} from "../../../modules/auth/services";
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean;
+  hasRoleAdmin: boolean;
   username: string;
   shoppingCardSize: number;
 
@@ -27,6 +29,7 @@ export class HeaderComponent implements OnInit {
     }
     if (this.isAuthenticated && !this.username) {
       this.username = this.authService.getUsername();
+      this.hasRoleAdmin = this.authService.hasRole(EnumRole.ROLE_ADMIN);
     }
   }
 }

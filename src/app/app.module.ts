@@ -8,9 +8,18 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {
-  MaterialModule, MainInterceptor, MainLayoutComponent, HeaderComponent, FooterComponent, HomepageComponent,
-  PagenotfoundComponent, ModalConfirmComponent, ModalConfirmDeleteComponent, ShoppingCartComponent
+  MaterialModule,
+  AuthInterceptor,
+  MainLayoutComponent,
+  HeaderComponent,
+  FooterComponent,
+  HomepageComponent,
+  PagenotfoundComponent,
+  ModalConfirmComponent,
+  ModalConfirmDeleteComponent,
+  ShoppingCartComponent
 } from "./shared";
+import { AccessDeniedPageComponent } from './shared/components/access-denied-page/access-denied-page.component';
 
 
 @NgModule({
@@ -23,7 +32,8 @@ import {
     PagenotfoundComponent,
     ModalConfirmComponent,
     ModalConfirmDeleteComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    AccessDeniedPageComponent
   ],
   imports: [
     AppRoutingModule,
@@ -39,7 +49,7 @@ import {
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
-      useClass: MainInterceptor
+      useClass: AuthInterceptor
     }
   ],
   bootstrap: [AppComponent]

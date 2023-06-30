@@ -1,18 +1,17 @@
-import {AfterViewInit, Component, EventEmitter, inject, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort, MatSortable, Sort} from "@angular/material/sort";
+import {MatSort, Sort} from "@angular/material/sort";
 import {MatDialog} from "@angular/material/dialog";
 
 import {IPageable} from "../../../../shared/interfaces";
 import {IUser} from "../../interfaces";
 import {ModalConfirmDeleteComponent} from "../../../../shared";
 import {UserService} from "../../services";
-import {AuthDataService} from "../../../auth/services";
-import {map} from "rxjs";
-import {UserComponent} from "../user/user.component";
-import {TagComponent} from "../../../tag/components";
+import {AuthDataService, AuthService} from "../../../auth/services";
+import {UserComponent} from "..";
+import {EnumRole} from "../../../auth/interfaces";
 
 @Component({
   selector: 'app-users',
@@ -42,6 +41,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               private router: Router,
               private dataService: AuthDataService,
               private userService: UserService,
@@ -49,6 +49,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.checkAccess(EnumRole.ROLE_ADMIN)) {
+      return;
+    }
     this.fetchData();
   }
 

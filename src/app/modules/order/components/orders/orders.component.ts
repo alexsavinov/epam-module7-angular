@@ -9,8 +9,9 @@ import {IOrder} from "../../interfaces";
 import {IPageable} from "../../../../shared/interfaces";
 import {OrderComponent} from "../order/order.component";
 import {ModalConfirmDeleteComponent} from "../../../../shared";
-import {AuthDataService} from "../../../auth/services";
+import {AuthDataService, AuthService} from "../../../auth/services";
 import {OrderService} from "../../services";
+import {EnumRole} from "../../../auth/interfaces";
 
 @Component({
   selector: 'app-orders',
@@ -39,7 +40,8 @@ export class OrdersComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(private authService: AuthService,
+              private activatedRoute: ActivatedRoute,
               private router: Router,
               private dataService: AuthDataService,
               private orderService: OrderService,
@@ -47,6 +49,10 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.checkAccess(EnumRole.ROLE_ADMIN)) {
+      return;
+    }
+
     this.fetchData();
   }
 

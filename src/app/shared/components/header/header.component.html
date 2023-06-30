@@ -21,12 +21,12 @@
 
       <div *ngIf="isAuthenticated">
 
-        <button mat-menu-item [routerLink]="'orders'" class="menu-button">
+        <button mat-menu-item *ngIf="hasRoleAdmin" [routerLink]="'orders'" class="menu-button">
           <mat-icon color="primary">credit_card</mat-icon>
           Orders
         </button>
 
-        <button mat-menu-item [routerLink]="'users'" class="menu-button">
+        <button mat-menu-item *ngIf="hasRoleAdmin" [routerLink]="'users'" class="menu-button">
           <mat-icon color="primary">people</mat-icon>
           Users
         </button>
@@ -60,7 +60,9 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button mat-icon-button aria-label="Shopping cart" [routerLink]="'shopping-cart'" class="shopping-cart-button">
+    <button mat-icon-button *ngIf="isAuthenticated"
+            aria-label="Shopping cart" [routerLink]="'shopping-cart'"
+            class="shopping-cart-button">
       <mat-icon matBadge="{{shoppingCardSize}}" matBadgeHidden="{{shoppingCardSize === 0}}">
         shopping_cart
       </mat-icon>

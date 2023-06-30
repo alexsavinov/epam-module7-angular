@@ -28,7 +28,7 @@
         <!-- NAME -->
         <mat-form-field>
           <mat-label>NAME</mat-label>
-          <input type="text" matInput formControlName="name"
+          <input type="text" matInput formControlName="name" [readonly]="!hasRoleAdmin"
                  [errorStateMatcher]="matcher" placeholder="name">
           <mat-error *ngIf="form.controls['name'].hasError('minlength')
        && !form.controls['name'].hasError('required')">
@@ -43,7 +43,7 @@
         <mat-form-field>
           <mat-label>DESCRIPTION</mat-label>
           <textarea matInput placeholder="description" formControlName="description"
-                    class="description"
+                    class="description" [readonly]="!hasRoleAdmin"
                     [errorStateMatcher]="matcher">
             {{certificate.description}}
           </textarea>
@@ -59,7 +59,7 @@
         <!-- PRICE -->
         <mat-form-field>
           <mat-label>PRICE</mat-label>
-          <input type="text" matInput formControlName="price"
+          <input type="text" matInput formControlName="price" [readonly]="!hasRoleAdmin"
                  [errorStateMatcher]="matcher" placeholder="price">
           <mat-error *ngIf="form.controls['price'].hasError('minlength')
        && !form.controls['price'].hasError('required')">
@@ -73,7 +73,7 @@
         <!-- DURATION -->
         <mat-form-field>
           <mat-label>DURATION</mat-label>
-          <input type="text" matInput formControlName="duration"
+          <input type="text" matInput formControlName="duration" [readonly]="!hasRoleAdmin"
                  [errorStateMatcher]="matcher" placeholder="duration">
           <mat-error *ngIf="form.controls['duration'].hasError('minlength')
        && !form.controls['duration'].hasError('required')">
@@ -117,7 +117,7 @@
             CLOSE
           </button>
 
-          <button mat-raised-button id="submit" type="submit" [disabled]="form.invalid">
+          <button mat-raised-button *ngIf="hasRoleAdmin" id="submit" type="submit" [disabled]="form.invalid">
             <mat-icon *ngIf="creating">add</mat-icon>
             <span *ngIf="creating">CREATE</span>
             <mat-icon *ngIf="!creating">save</mat-icon>

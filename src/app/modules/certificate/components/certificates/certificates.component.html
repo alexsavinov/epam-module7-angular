@@ -6,7 +6,7 @@
       Gift certificates
     </div>
 
-    <button mat-raised-button class="button-create" (click)="create()">
+    <button mat-raised-button *ngIf="hasRoleAdmin" class="button-create" (click)="create()">
       <mat-icon>add_circle</mat-icon>
       Add
     </button>
@@ -65,12 +65,13 @@
 
             <button mat-button class="button-details" (click)="edit(row.id)">
               <mat-icon>description</mat-icon>
-              Edit
+              <span *ngIf="hasRoleAdmin">Edit</span>
+              <span *ngIf="!hasRoleAdmin">View</span>
             </button>
 
             <span class="spacer"></span>
 
-            <button mat-button class="button-delete" (click)="delete(row.id)">
+            <button mat-button *ngIf="hasRoleAdmin" class="button-delete" (click)="delete(row.id)">
               <mat-icon>delete</mat-icon>
               Delete
             </button>

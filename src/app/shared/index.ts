@@ -9,6 +9,9 @@ export * from './components/shopping-cart/shopping-cart.component';
 
 export * from './utils/CustomErrorStateMatcher';
 export * from './utils/SearchStringHelper';
+
 export * from './modules/material.module';
+
 export * from './guards/form.guard';
-export * from './interceptors/main.interceptor';
+
+export * from './interceptors/auth.interceptor';

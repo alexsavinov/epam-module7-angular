@@ -1,9 +1,9 @@
 import {Component, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common'
 
 import {IUser} from "../../../user/interfaces";
-import {IRole} from "../../interfaces";
+import {EnumRole, IRole} from "../../interfaces";
 import {AuthService} from "../../services";
 import {UserService} from "../../../user/services";
 
@@ -21,17 +21,21 @@ export class ProfileComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private activatedRoute: ActivatedRoute,
+              private router: Router,
               private userService: UserService,
               private location: Location) {
   }
 
   ngOnInit() {
+    if (this.authService.checkAccess()) {
+      return;
+    }
+
     this.accessToken = this.authService.getAccessToken();
     this.refreshToken = this.authService.getRefreshToken();
     const id: string = this.authService.getUserId();
 
     this.userService.getById(id).subscribe(data => {
-    // this.activatedRoute.data.subscribe(({data}) => {
       this.user = data as IUser;
       this.roles = data.roles?.map((role: IRole) => role.name).join(', ');
     });

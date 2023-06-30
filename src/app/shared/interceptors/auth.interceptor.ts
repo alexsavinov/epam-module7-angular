@@ -9,7 +9,7 @@ import {IRefreshTokenResponse, IToken} from "../../modules/auth/interfaces";
 
 
 @Injectable()
-export class MainInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
   isRefreshing = false
 
   constructor(private authService: AuthService, private router: Router) {
@@ -37,10 +37,27 @@ export class MainInterceptor implements HttpInterceptor {
         if (res && res.error && res.status === 403) {
 
           console.log("403 error", res.error)
-          console.log("403 error", res.error.error)
+          console.log("403 error.error", res.error.error)
+          console.log('access-denied')
+
+
           return this.handleAccessError(request, next);
+
+          // this.router.navigate(['access-denied']);
           // return throwError(() => new Error(`[${res.status}] ${res.error.error}`));
         }
+
+
+        if (res && res.error && res.status === 404) {
+
+          console.log("404 error", res);
+          // console.log("errorCode", res.error.errorCode);
+          return;
+          // return this.handleAccessError(request, next);
+          // return throwError(() => new Error(`[${res.error.errorCode}] ${res.error.errorMessage}`));
+        }
+
+
         // -- 409 errors
         if (res && res.error && res.status === 409) {
 
@@ -48,6 +65,15 @@ export class MainInterceptor implements HttpInterceptor {
           // return this.handleAccessError(request, next);
           return throwError(() => new Error(`[${res.error.errorCode}] ${res.error.errorMessage}`));
         }
+
+        if (res && res.error && res.status === 500) {
+
+          console.log("500 error", res);
+          return;
+          // return this.handleAccessError(request, next);
+          // return throwError(() => new Error(`[${res.error.errorCode}] ${res.error.errorMessage}`));
+        }
+
 
         this.router.navigate(['auth/login']);
 
@@ -73,6 +99,7 @@ export class MainInterceptor implements HttpInterceptor {
       // Redirect to Login page if there is no Refresh token.
       if (this.authService.getRefreshToken() == null) {
         this.isRefreshing = false;
+        console.log('RefreshToken is null -- navigate to auth/login')
         this.router.navigate(['auth/login']);
         return;
       }
@@ -83,7 +110,7 @@ export class MainInterceptor implements HttpInterceptor {
           return next.handle(this.addToken(request, tokens.accessToken))
         }),
         catchError((error) => {
-          console.log("handleAccessError -- ", error);
+          // console.log("handleAccessError -- ", error);
           this.isRefreshing = false;
           this.authService.clearToken();
           this.router.navigate(['auth/login']);

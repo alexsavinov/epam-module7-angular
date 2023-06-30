@@ -7,10 +7,11 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {IPageable} from "../../../../shared/interfaces";
 import {ITag} from "../../interfaces";
-import {AuthDataService} from "../../../auth/services";
+import {AuthDataService, AuthService} from "../../../auth/services";
 import {ModalConfirmDeleteComponent} from "../../../../shared";
 import {TagService} from "../../services";
 import {TagComponent} from "../tag/tag.component";
+import {EnumRole} from "../../../auth/interfaces";
 
 
 @Component({
@@ -19,6 +20,8 @@ import {TagComponent} from "../tag/tag.component";
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
+  hasRoleAdmin: boolean;
+
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource: MatTableDataSource<ITag>;
   pageEvent: PageEvent;
@@ -42,12 +45,14 @@ export class TagsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private authService: AuthService,
               private dataService: AuthDataService,
               private tagService: TagService,
               private matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.hasRoleAdmin = this.authService.hasRole(EnumRole.ROLE_ADMIN);
     this.fetchData();
   }
 

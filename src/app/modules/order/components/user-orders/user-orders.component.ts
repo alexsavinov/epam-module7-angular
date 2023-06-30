@@ -7,7 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {IPageable} from "../../../../shared/interfaces";
 import {IOrder} from "../../interfaces";
-import {ITag} from "../../../tag/interfaces";
+import {emptyTag, ITag} from "../../../tag/interfaces";
 import {AuthService} from "../../../auth/services";
 import {OrderService} from "../../services";
 import {TagService} from "../../../tag/services";
@@ -58,11 +58,17 @@ export class UserOrdersComponent implements OnInit {
 
     this.tagService.getTopUsedTag(this.userId).subscribe((data) => {
       this.topUsedTag = data;
-    });
+},
+      error => {
+            // this.topUsedTag = emptyTag();
+      });
 
     this.orderService.getHighestCostByUserId(this.userId).subscribe((data) => {
       this.highestCost = data.highestCost;
-    });
+    },
+      error => {
+            this.highestCost = 0;
+      });
 
     this.fetchData();
   }

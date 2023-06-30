@@ -5,12 +5,14 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatSort, Sort} from "@angular/material/sort";
 import {MatDialog} from "@angular/material/dialog";
 
-import {AuthDataService} from "../../../auth/services";
 import {IPageable} from "../../../../shared/interfaces";
-import {ModalConfirmDeleteComponent} from "../../../../shared";
 import {ICertificate} from "../../interfaces";
+import {AuthDataService, AuthService} from "../../../auth/services";
 import {CertificateService} from "../../services";
-import {CertificateComponent} from "../certificate/certificate.component";
+import {ModalConfirmDeleteComponent} from "../../../../shared";
+import {EnumRole} from "../../../auth/interfaces";
+import {CertificateComponent} from "..";
+
 
 @Component({
   selector: 'app-certificates',
@@ -18,6 +20,8 @@ import {CertificateComponent} from "../certificate/certificate.component";
   styleUrls: ['./certificates.component.scss']
 })
 export class CertificatesComponent implements OnInit {
+  hasRoleAdmin: boolean;
+
   displayedColumns: string[] = ['id', 'name', 'description', 'price', 'duration', 'tags', 'action'];
   dataSource: MatTableDataSource<ICertificate>;
   pageEvent: PageEvent;
@@ -40,6 +44,7 @@ export class CertificatesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               private router: Router,
               private dataService: AuthDataService,
               private certificateService: CertificateService,
@@ -47,6 +52,7 @@ export class CertificatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.hasRoleAdmin = this.authService.hasRole(EnumRole.ROLE_ADMIN);
     this.fetchData();
   }
 

@@ -4,9 +4,11 @@ import {Observable, tap} from 'rxjs';
 
 import {urls} from '../../../../constants';
 import {
+  EnumRole,
   ILoginRequest, ILoginResponse,
   IMessageResponse, IRefreshTokenResponse, IRegisterRequest
 } from '../interfaces';
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -18,7 +20,8 @@ export class AuthService {
   private _refreshTokenKey = 'refresh';
   private _shoppingCard = 'shopping-card';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private router: Router) {
   }
 
   register(user: IRegisterRequest): Observable<IMessageResponse> {
@@ -87,6 +90,13 @@ export class AuthService {
     return nameFromToken;
   }
 
+  getRoles(): EnumRole[] {
+    let payload = this.parseAccessToken();
+    const roles = payload.roles;
+
+    return roles;
+  }
+
   addToShoppingCard(id: number): number {
     const shoppingCard = this.getShoppingCard();
     if (!shoppingCard.includes(id)) {
@@ -125,5 +135,29 @@ export class AuthService {
     } else {
       localStorage.removeItem(this._shoppingCard);
     }
+  }
+
+  hasRole(role: EnumRole): boolean {
+    if (this.isAuthenticated()) {
+      return this.getRoles().includes(role);
+    }
+    return false;
+  }
+
+  checkAccess(requiredRole?: EnumRole): boolean {
+    console.log('checkAccess [isAuthenticated]', this.isAuthenticated())
+    if (!this.isAuthenticated()) {
+      this.router.navigate(['access-denied']);
+      return true;
+    }
+
+    console.log('checkAccess [requiredRole]', requiredRole)
+    if (requiredRole && !this.hasRole(requiredRole)) {
+
+      this.router.navigate(['access-denied']);
+      return true;
+    }
+
+    return false;
   }
 }

@@ -83,9 +83,9 @@
       {{errorMessage}}
     </div>
 
-    <div class="details">
+    <div  *ngIf="topUsedTag || highestCost" class="details">
 
-      <div *ngIf="topUsedTag" class="details-item mat-elevation-z7"
+      <div *ngIf="topUsedTag" class="details-item"
       matRipple [matRippleCentered]="false" [matRippleDisabled]="false"
      [matRippleUnbounded]="false" [matRippleRadius]="180" [matRippleColor]="'#ede7f6'">
         <div class="details-title  mat-elevation-z0">
@@ -96,7 +96,7 @@
         </div>
       </div>
 
-      <div *ngIf="highestCost" class="details-item mat-elevation-z3"
+      <div *ngIf="highestCost" class="details-item"
       matRipple [matRippleCentered]="false" [matRippleDisabled]="false"
      [matRippleUnbounded]="false" [matRippleRadius]="180" [matRippleColor]="'#ede7f6'">
         <div class="details-title">

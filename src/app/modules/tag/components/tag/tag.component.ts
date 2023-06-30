@@ -7,6 +7,8 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {emptyTag, ITag} from "../../interfaces";
 import {TagService} from "../../services";
 import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared";
+import {EnumRole} from "../../../auth/interfaces";
+import {AuthService} from "../../../auth/services";
 
 
 @Component({
@@ -17,6 +19,7 @@ import {CustomErrorStateMatcher, ModalConfirmComponent} from "../../../../shared
 export class TagComponent implements OnInit {
   tag: ITag;
   form: FormGroup;
+  hasRoleAdmin: boolean;
 
   matcher = new CustomErrorStateMatcher();
   creating: boolean;
@@ -25,6 +28,7 @@ export class TagComponent implements OnInit {
   errorMessage: string;
 
   constructor(private tagService: TagService,
+              private authService: AuthService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
               private router: Router,
@@ -34,6 +38,7 @@ export class TagComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.hasRoleAdmin = this.authService.hasRole(EnumRole.ROLE_ADMIN);
     if (this.data) {
       if (this.data['creating']) {
         this.creating = true;

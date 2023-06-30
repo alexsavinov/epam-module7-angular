@@ -13,6 +13,7 @@ import {CertificateComponent} from "../../../modules/certificate/components";
 import {ICreateOrderRequest} from "../../../modules/order/interfaces";
 import {OrderService} from "../../../modules/order/services";
 import {MatListOption, MatSelectionList} from "@angular/material/list";
+import {EnumRole} from "../../../modules/auth/interfaces";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -36,24 +37,25 @@ export class ShoppingCartComponent implements OnInit {
               private dataService: AuthDataService,
               private authService: AuthService,
               private certificateService: CertificateService,
-              private orderService: OrderService,
-              private matDialog: MatDialog) {
+              private orderService: OrderService) {
   }
 
   ngOnInit(): void {
+    if (this.authService.checkAccess()) {
+      return;
+    }
+
     this.userId = this.authService.getUserId();
 
     const shoppingCard: number[] = this.authService.getShoppingCard();
 
     for (const id of shoppingCard) {
       this.certificateService.getById(id.toString()).subscribe(data => {
-        // console.log(data)
         this.certificates.push(data);
         this.totalSum += data.price;
       });
     }
   }
-
 
   delete(selected: MatListOption[]) {
     selected.forEach(item => {

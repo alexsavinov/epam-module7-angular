@@ -25,7 +25,7 @@
 
         <mat-form-field>
           <mat-label>NAME</mat-label>
-          <input type="text" matInput formControlName="name"
+          <input type="text" matInput formControlName="name" [readonly]="!hasRoleAdmin"
                  [errorStateMatcher]="matcher" placeholder="name">
           <mat-error *ngIf="form.controls['name'].hasError('minlength')
        && !form.controls['name'].hasError('required')">
@@ -47,7 +47,7 @@
             CLOSE
           </button>
 
-          <button mat-raised-button id="submit" type="submit" [disabled]="form.invalid">
+          <button mat-raised-button *ngIf="hasRoleAdmin" id="submit" type="submit" [disabled]="form.invalid">
             <mat-icon *ngIf="creating">add</mat-icon>
             <span *ngIf="creating">CREATE</span>
             <mat-icon *ngIf="!creating">save</mat-icon>

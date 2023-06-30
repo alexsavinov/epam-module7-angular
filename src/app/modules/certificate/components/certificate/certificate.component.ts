@@ -12,6 +12,8 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {ITag} from "../../../tag/interfaces";
 import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
+import {AuthService} from "../../../auth/services";
+import {EnumRole} from "../../../auth/interfaces";
 
 @Component({
   selector: 'app-certificate',
@@ -27,21 +29,17 @@ export class CertificateComponent implements OnInit {
 
   infoMessage: string;
   errorMessage: string;
+  hasRoleAdmin: boolean;
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: ITag[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
 
   announcer = inject(LiveAnnouncer);
 
   tags: ITag[];
 
-  // @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
-  // tagCtrl = new FormControl('');
-  // filteredTags: Observable<ITag[]>;
-
-
   constructor(private certificateService: CertificateService,
+              private authService: AuthService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
               private router: Router,
@@ -51,6 +49,7 @@ export class CertificateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.hasRoleAdmin = this.authService.hasRole(EnumRole.ROLE_ADMIN);
     if (this.data) {
       if (this.data['creating']) {
         this.creating = true;
@@ -70,6 +69,10 @@ export class CertificateComponent implements OnInit {
   }
 
   addTag(event: MatChipInputEvent): void {
+    if (!this.hasRoleAdmin) {
+      return;
+    }
+
     const value = (event.value || '').trim();
 
     // Add our fruit
@@ -82,6 +85,10 @@ export class CertificateComponent implements OnInit {
   }
 
   removeTag(tag: ITag): void {
+    if (!this.hasRoleAdmin) {
+      return;
+    }
+
     const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
@@ -91,6 +98,10 @@ export class CertificateComponent implements OnInit {
   }
 
   editTag(tag: ITag, event: MatChipEditedEvent) {
+    if (!this.hasRoleAdmin) {
+      return;
+    }
+
     const value = event.value.trim();
 
     // Remove Tag if it no longer has a name

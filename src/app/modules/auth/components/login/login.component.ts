@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   _createForm(): void {
     this.form = new FormGroup({
       username: new FormControl(
-        'user2',
+        'user3',
+        // 'user2',
         [
           Validators.required,
           Validators.minLength(4)
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit {
       //     Validators.email
       //   ]),
       password: new FormControl(
-        'user2',
+        // 'user2',
+        'user3',
         [
           Validators.required,
           // Validators.pattern(

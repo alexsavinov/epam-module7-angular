@@ -1,19 +1,36 @@
 @import "../../../../styles";
 
 main {
-  min-height: 55vh;
+  min-height: 62vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 10em;
   background-color: $primary-color100;
   padding: 10em;
+  align-items: center;
+}
+
+
+.title {
+  display: flex;
+  font-size: 8vw;
+  font-family: Arial !important;
+}
+
+.title1 {
+  color: white;
+}
+
+.title2 {
+  color: $primary-color700;
 }
 
 .welcome-text {
-  padding-bottom: 2em;
+  padding: 2rem 0;
   font-size: 1.4rem;
-  color: $primary-color1000;
-
+  color: $primary-color900;
+  display: flex;
+  text-align: justify;
 }
 
 .button-search {
@@ -23,4 +40,3 @@ main {
   font-size: 1.5rem;
   background-color: $primary-color600;
 }
-

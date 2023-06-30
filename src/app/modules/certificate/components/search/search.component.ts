@@ -8,12 +8,13 @@ import {
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatDialog} from "@angular/material/dialog";
 import {MatSort, Sort} from "@angular/material/sort";
+import {Subject} from "rxjs";
+import {debounceTime} from 'rxjs/operators';
 
-import {CertificateService} from "../../services";
 import {IPageable} from "../../../../shared/interfaces";
 import {ICertificate, ISearchRequest} from "../../interfaces";
+import {CertificateService} from "../../services";
 import {AuthDataService, AuthService} from "../../../auth/services";
 
 
@@ -23,7 +24,9 @@ import {AuthDataService, AuthService} from "../../../auth/services";
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  displayedColumns: string[] = ['createDate', 'name', 'description', 'price', 'duration', 'tags', 'action'];
+  isAuthenticated: boolean;
+
+  displayedColumns: string[] = ['createDate', 'name', 'description', 'price', 'duration', 'tags'];
   dataSource: MatTableDataSource<ICertificate>;
   pageEvent: PageEvent;
   @Output()
@@ -42,6 +45,7 @@ export class SearchComponent implements OnInit {
 
   infoMessage: string;
   errorMessage: string;
+  typeTerm: Subject<string> = new Subject<string>();
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -50,17 +54,45 @@ export class SearchComponent implements OnInit {
               private router: Router,
               private dataService: AuthDataService,
               private certificateService: CertificateService,
-              private authService: AuthService,
-              private matDialog: MatDialog) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.typeTerm.pipe(debounceTime(2000)).subscribe(x => this.applyFilter(x));
+
+    this.isAuthenticated = this.authService.isAuthenticated();
+    if (this.isAuthenticated) {
+      this.displayedColumns.push('action');
+    }
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.filterString = '';
+      if (params['name']) {
+        this.setFilter(params['name']);
+        this.filterString = params['name'];
+      }
+      if (params['tags']) {
+        this.searchRequest.tags = params['tags'];
+        const prefix = this.filterString ? ' ' : '';
+        const formattedTags = params['tags']
+          .split(',')
+          .map((tag: string) => `#(${tag.trim()})`)
+          .join(' ');
+        this.filterString += prefix + formattedTags;
+      }
+    });
     this.fetchData();
   }
 
-  applyFilter(event: Event) {
+  readInput(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
+    this.typeTerm.next(filterValue)
+  }
+
+  applyFilter(filterValue: string) {
     this.setFilter(filterValue.trim());
+    this.updateQueryParams();
+    this.fetchData();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -80,18 +112,25 @@ export class SearchComponent implements OnInit {
     const resultTags = [...filterValue.matchAll(regexTag)]
       .filter(i => i[2])
       .map(i => i[2])
-      .join(', ')
+      .join(',')
 
     if (resultTags) {
       this.searchRequest.tags = resultTags;
     }
-
-    this.fetchData();
-    this.updateQueryParams();
   }
 
+  filterTag(tag: string) {
+    if (this.searchRequest.tags?.includes(tag)) {
+      return;
+    }
+    this.number = 0;
+    this.searchRequest.tags = ((this.searchRequest.tags) ? this.searchRequest.tags + ',' : '') + tag.trim();
+    this.filterString = ((this.filterString) ? this.filterString + ' ' : '') + `#(${tag.trim()})`;
+    this.updateQueryParams()
+    this.fetchData();
+  }
 
-  private fetchData() {
+  public fetchData() {
     const pageable: IPageable = {
       page: this.number,
       size: this.size,
@@ -126,23 +165,19 @@ export class SearchComponent implements OnInit {
     this.dataService.shoppingCardSize.next(shoppingCardSize);
   }
 
-  filterTag(tag: string) {
-    if (this.searchRequest.tags?.includes(tag)) {
-      return;
-    }
-    this.number = 0;
-    this.searchRequest.tags = ((this.searchRequest.tags) ? this.searchRequest.tags + ', ' : '') + tag;
-    this.filterString = ((this.filterString) ? this.filterString + ' ' : '') + `#(${tag})`;
-    this.fetchData();
-    this.updateQueryParams();
-  }
-
-  private updateQueryParams() {
+  public updateQueryParams() {
     this.router.navigate(
       [],
       {
         relativeTo: this.activatedRoute,
         queryParams: this.searchRequest
       });
+  }
+
+  clearFilter() {
+    this.filterString = '';
+    this.setFilter('');
+    this.updateQueryParams();
+    this.fetchData();
   }
 }

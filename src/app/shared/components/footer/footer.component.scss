@@ -1,15 +1,22 @@
 @import "../../../../styles";
 
 footer {
-  /*height: 2em;*/
+  height: 2em;
   //position: absolute;
   //bottom: 0;
-  //width: 100vi;
-      flex-grow: 0;
-    flex-shrink: 0;
-}
+  width: 100vi;
 
-mat-toolbar {
-  font-size: 1em;
+  //flex-grow: 0;
+  //flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: $primary-color;
+  color: $primary-color50;
   justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  bottom: 0px;
+  padding: 0;
+  font-size: 1em;
 }

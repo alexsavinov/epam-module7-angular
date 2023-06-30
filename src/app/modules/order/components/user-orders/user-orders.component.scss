@@ -6,6 +6,7 @@ main {
 
 .content {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -35,7 +36,7 @@ mat-form-field {
   width: 37rem;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
   gap: 2rem;
 }
 
@@ -43,34 +44,38 @@ mat-form-field {
   width: 20rem;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
   //padding: 2rem;
   //gap: 2rem;
-  background-color: white;
-  border: 1px solid $primary-color100;
-  border-radius: 0.3rem;
+  //background-color: white;
+  //border: 1px solid $primary-color100;
+  //border-radius: 0.3rem;
 }
 
 .details-title {
   width: 100%;
   display: flex;
   box-sizing: border-box;
-  justify-content: end;
-  background-color: $primary-color100;
-  color: $primary-color800;
-  font-size: 2rem;
+  justify-content: center;
+  //background-color: $primary-color50;
+
+  color: $primary-color900;
+  font-size: 2.3rem;
   padding: 0.75rem;
-  border-radius: 0.3rem 0.3rem 0 0;
+  //border-radius: 0.3rem 0.3rem 0 0;
 }
 
 .details-value {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   box-sizing: border-box;
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 1rem;
-  background-color: white;
-  border-radius: 0 0 0.3rem 0.3rem;
+  //background-color: white;
+  background-color: $accent-color400;
+  //border-radius: 0 0 0.3rem 0.3rem;
+  border: 1px solid $primary-color400;
+  border-radius: 0.3rem;
   color: $primary-color800;
 }
